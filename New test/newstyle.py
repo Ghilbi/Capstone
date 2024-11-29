@@ -85,21 +85,28 @@ def show_rooms():
     else:
         messagebox.showerror("Error", "No rooms available.")
 
-# Function to generate and display all subjects
+# Function to generate and display subjects based on selected track
 def generate_subjects():
+    selected_track = track_var.get()  # Get the selected track from the dropdown
     conn = sqlite3.connect("subjects.db")
     c = conn.cursor()
-    c.execute("SELECT track, code, desc, type FROM subjects")
+
+    # Modify the SQL query to filter subjects based on the selected track
+    if selected_track == "All Track":
+        c.execute("SELECT track, code, desc, type FROM subjects")
+    else:
+        c.execute("SELECT track, code, desc, type FROM subjects WHERE track=?", (selected_track,))
+
     subjects = c.fetchall()
     conn.close()
 
     if subjects:
-        subject_list.delete(1.0, tk.END)
+        subject_list.delete(1.0, tk.END)  # Clear the existing list
         for subject in subjects:
             subject_list.insert(tk.END, f"Track: {subject[0]} | Code: {subject[1]} | Description: {subject[2]} | Type: {subject[3]}\n")
             subject_list.insert(tk.END, "-" * 40 + "\n")
     else:
-        messagebox.showerror("Error", "No subjects available.")
+        messagebox.showerror("Error", "No subjects available for the selected track.")
 
 # --- COURSE OFFERING PAGE ---
 def generate_course_offering():
@@ -133,7 +140,7 @@ def generate_course_offering():
             time_slots.append(formatted_time)
             start_time += 1
 
-        # For each subject, assign a room, time slot and create the offering
+        # For each subject, assign a room, time slot, and create the offering
         for i, subject in enumerate(subjects):
             if i < len(rooms) and i < len(time_slots):  # Ensure there's a room and time slot available
                 room = rooms[i]
@@ -149,87 +156,96 @@ def generate_course_offering():
     else:
         messagebox.showerror("Error", "No subjects or rooms available.")
 
-# Create main window
-root = tk.Tk()
-root.title("Automated Subject and Room Management")
+# Function to initialize the Tkinter window
+def init_gui():
+    global track_var, subject_code_entry, subject_desc_entry, subject_type_var
+    global room_name_entry, room_type_var, max_students_entry
+    global course_offering_list, subject_list, rooms_list
 
-# Create notebook (tabbed interface)
-notebook = ttk.Notebook(root)
-notebook.pack(fill=tk.BOTH, expand=True)
+    window = tk.Tk()
+    window.title("Course and Room Management")
 
-# Create tabs for Subjects, Rooms, and Course Offering
-subject_tab = ttk.Frame(notebook)
-room_tab = ttk.Frame(notebook)
-course_offering_tab = ttk.Frame(notebook)
+    # Tab control
+    notebook = ttk.Notebook(window)
+    notebook.pack(fill=tk.BOTH, expand=True)
 
-notebook.add(subject_tab, text="Subjects")
-notebook.add(room_tab, text="Rooms")
-notebook.add(course_offering_tab, text="Course Offering")
+    # Create subject and room tabs
+    subjects_tab = ttk.Frame(notebook)
+    rooms_tab = ttk.Frame(notebook)
+    course_offering_tab = ttk.Frame(notebook)
 
-# --- Subject Tab Widgets ---
-subject_code_label = tk.Label(subject_tab, text="Subject Code:")
-subject_code_label.grid(row=0, column=0)
-subject_code_entry = tk.Entry(subject_tab)
-subject_code_entry.grid(row=0, column=1)
+    notebook.add(subjects_tab, text="Subjects")
+    notebook.add(rooms_tab, text="Rooms")
+    notebook.add(course_offering_tab, text="Course Offering")
 
-subject_desc_label = tk.Label(subject_tab, text="Subject Description:")
-subject_desc_label.grid(row=1, column=0)
-subject_desc_entry = tk.Entry(subject_tab)
-subject_desc_entry.grid(row=1, column=1)
+    # Subject Tab Layout
+    track_label = tk.Label(subjects_tab, text="Select Track:")
+    track_label.grid(row=0, column=0, padx=10, pady=5)
+    track_var = ttk.Combobox(subjects_tab, values=["All Tracks", "Network & Security", "Web Technology", "Enterprise Resource Planning"])
+    track_var.set("All Track")
+    track_var.grid(row=0, column=1, padx=10, pady=5)
 
-track_label = tk.Label(subject_tab, text="Track:")
-track_label.grid(row=2, column=0)
-track_var = tk.StringVar()
-track_dropdown = ttk.Combobox(subject_tab, textvariable=track_var, values=["Network & Security", "Web Technology", "Enterprise Resource Planning", "All Tracks"])
-track_dropdown.grid(row=2, column=1)
+    subject_code_label = tk.Label(subjects_tab, text="Subject Code:")
+    subject_code_label.grid(row=1, column=0, padx=10, pady=5)
+    subject_code_entry = tk.Entry(subjects_tab)
+    subject_code_entry.grid(row=1, column=1, padx=10, pady=5)
 
-subject_type_label = tk.Label(subject_tab, text="Subject Type:")
-subject_type_label.grid(row=3, column=0)
-subject_type_var = tk.StringVar()
-subject_type_dropdown = ttk.Combobox(subject_tab, textvariable=subject_type_var, values=["Pure Lecture", "Lecture and Lab"])
-subject_type_dropdown.grid(row=3, column=1)
+    subject_desc_label = tk.Label(subjects_tab, text="Subject Description:")
+    subject_desc_label.grid(row=2, column=0, padx=10, pady=5)
+    subject_desc_entry = tk.Entry(subjects_tab)
+    subject_desc_entry.grid(row=2, column=1, padx=10, pady=5)
 
-add_subject_button = tk.Button(subject_tab, text="Add Subject", command=add_subject)
-add_subject_button.grid(row=4, column=0, columnspan=2)
+    subject_type_label = tk.Label(subjects_tab, text="Subject Type:")
+    subject_type_label.grid(row=3, column=0, padx=10, pady=5)
+    subject_type_var = ttk.Combobox(subjects_tab, values=["Lecture", "Lecture and Lab"])
+    subject_type_var.set("Lecture")
+    subject_type_var.grid(row=3, column=1, padx=10, pady=5)
 
-generate_subjects_button = tk.Button(subject_tab, text="Generate Subjects", command=generate_subjects)
-generate_subjects_button.grid(row=5, column=0, columnspan=2)
+    add_subject_button = tk.Button(subjects_tab, text="Add Subject", command=add_subject)
+    add_subject_button.grid(row=4, column=0, columnspan=2, pady=10)
 
-subject_list = tk.Text(subject_tab, height=10, width=50)
-subject_list.grid(row=6, column=0, columnspan=2)
+    generate_subjects_button = tk.Button(subjects_tab, text="Generate Subjects", command=generate_subjects)
+    generate_subjects_button.grid(row=5, column=0, columnspan=2, pady=10)
 
-# --- Room Tab Widgets ---
-room_name_label = tk.Label(room_tab, text="Room Name:")
-room_name_label.grid(row=0, column=0)
-room_name_entry = tk.Entry(room_tab)
-room_name_entry.grid(row=0, column=1)
+    subject_list = tk.Text(subjects_tab, width=60, height=10)
+    subject_list.grid(row=6, column=0, columnspan=2, padx=10, pady=10)
 
-room_type_label = tk.Label(room_tab, text="Room Type:")
-room_type_label.grid(row=1, column=0)
-room_type_var = tk.StringVar()
-room_type_dropdown = ttk.Combobox(room_tab, textvariable=room_type_var, values=["Lecture", "Lecture and Lab"])
-room_type_dropdown.grid(row=1, column=1)
+    # Room Tab Layout
+    room_name_label = tk.Label(rooms_tab, text="Room Name:")
+    room_name_label.grid(row=0, column=0, padx=10, pady=5)
+    room_name_entry = tk.Entry(rooms_tab)
+    room_name_entry.grid(row=0, column=1, padx=10, pady=5)
 
-max_students_label = tk.Label(room_tab, text="Max Students:")
-max_students_label.grid(row=2, column=0)
-max_students_entry = tk.Entry(room_tab)
-max_students_entry.grid(row=2, column=1)
+    room_type_label = tk.Label(rooms_tab, text="Room Type:")
+    room_type_label.grid(row=1, column=0, padx=10, pady=5)
+    room_type_var = ttk.Combobox(rooms_tab, values=["Lecture", "Lecture and Lab"])
+    room_type_var.set("Lecture")
+    room_type_var.grid(row=1, column=1, padx=10, pady=5)
 
-add_room_button = tk.Button(room_tab, text="Add Room", command=add_room)
-add_room_button.grid(row=3, column=0, columnspan=2)
+    max_students_label = tk.Label(rooms_tab, text="Max Students:")
+    max_students_label.grid(row=2, column=0, padx=10, pady=5)
+    max_students_entry = tk.Entry(rooms_tab)
+    max_students_entry.grid(row=2, column=1, padx=10, pady=5)
 
-show_rooms_button = tk.Button(room_tab, text="Show Rooms", command=show_rooms)
-show_rooms_button.grid(row=4, column=0, columnspan=2)
+    add_room_button = tk.Button(rooms_tab, text="Add Room", command=add_room)
+    add_room_button.grid(row=3, column=0, columnspan=2, pady=10)
 
-rooms_list = tk.Text(room_tab, height=10, width=50)
-rooms_list.grid(row=5, column=0, columnspan=2)
+    show_rooms_button = tk.Button(rooms_tab, text="Show Rooms", command=show_rooms)
+    show_rooms_button.grid(row=4, column=0, columnspan=2, pady=10)
 
-# --- Course Offering Tab Widgets ---
-generate_course_offering_button = tk.Button(course_offering_tab, text="Generate Course Offering", command=generate_course_offering)
-generate_course_offering_button.grid(row=0, column=0, columnspan=2)
+    rooms_list = tk.Text(rooms_tab, width=60, height=10)
+    rooms_list.grid(row=5, column=0, columnspan=2, padx=10, pady=10)
 
-course_offering_list = tk.Text(course_offering_tab, height=15, width=50)
-course_offering_list.grid(row=1, column=0, columnspan=2)
+    # Course Offering Tab Layout
+    generate_course_button = tk.Button(course_offering_tab, text="Generate Course Offerings", command=generate_course_offering)
+    generate_course_button.grid(row=0, column=0, columnspan=2, pady=10)
 
-# Start the application
-root.mainloop()
+    course_offering_list = tk.Text(course_offering_tab, width=60, height=10)
+    course_offering_list.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
+
+    window.mainloop()
+
+# Initialize the databases and GUI
+create_subjects_db()
+create_rooms_db()
+init_gui()
