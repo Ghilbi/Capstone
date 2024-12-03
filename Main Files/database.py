@@ -7,11 +7,11 @@ cursor = conn.cursor()
 
 def create_tables():
     """Create the necessary tables if they do not exist."""
-    # Tracks Table
+    # Tracks Table with UNIQUE constraint on track_name
     cursor.execute('''CREATE TABLE IF NOT EXISTS Tracks (
                         id INTEGER PRIMARY KEY,
-                        track_name TEXT)''')
-    
+                        track_name TEXT UNIQUE)''')  # Added UNIQUE constraint
+
     # Subjects Table
     cursor.execute('''CREATE TABLE IF NOT EXISTS Subjects (
                         id INTEGER PRIMARY KEY,
@@ -44,9 +44,15 @@ def create_tables():
 # --- Existing functions for Tracks and Subjects ---
 
 def add_track(track_name):
-    """Add a new track to the database."""
-    cursor.execute('INSERT INTO Tracks (track_name) VALUES (?)', (track_name,))
-    conn.commit()
+    """Add a new track to the database if it doesn't already exist."""
+    if not track_exists(track_name):
+        cursor.execute('INSERT INTO Tracks (track_name) VALUES (?)', (track_name,))
+        conn.commit()
+
+def track_exists(track_name):
+    """Check if a track with the given name exists in the database."""
+    cursor.execute('SELECT 1 FROM Tracks WHERE track_name = ?', (track_name,))
+    return cursor.fetchone() is not None
 
 def fetch_tracks():
     """Fetch all tracks from the database."""
@@ -138,7 +144,7 @@ def delete_room_db(room_id):
     cursor.execute('DELETE FROM Rooms WHERE id = ?', (room_id,))
     conn.commit()
 
-# --- Course Offering Functions (Merged from course_offering_database.py) ---
+# --- Course Offering Functions ---
 
 def clear_course_offerings():
     """Clear all course offerings."""

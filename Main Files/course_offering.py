@@ -92,9 +92,16 @@ class CourseOfferingPage:
         # Groups
         groups = ['A', 'B']
 
-        # Prepare rooms by type
-        lecture_rooms = [room for room in rooms if room[2] == 'Lecture']
-        lab_rooms = [room for room in rooms if room[2] == 'Lab']
+        # Number of sections per year level per group
+        num_sections = 4  # Adjust this number as needed
+
+        # Prepare rooms by type, excluding Gym and Aud from general rooms
+        lecture_rooms = [room for room in rooms if room[2] == 'Lecture' and room[1] not in ['Gym', 'Aud']]
+        lab_rooms = [room for room in rooms if room[2] == 'Lab' and room[1] not in ['Gym', 'Aud']]
+
+        # Shuffle lecture and lab rooms to distribute usage
+        random.shuffle(lecture_rooms)
+        random.shuffle(lab_rooms)
 
         # Special rooms
         minor_rooms = [room for room in rooms if room[1] in ['U706', 'U402', 'U705']]
@@ -116,6 +123,14 @@ class CourseOfferingPage:
             for year_num in ['1', '2', '3']:
                 # Initialize section letters
                 section_letters = list(string.ascii_uppercase)
+                if num_sections > len(section_letters):
+                    raise Exception("Number of sections exceeds available letters.")
+                section_codes = [f"{year_num}{section_letters[i]}" for i in range(num_sections)]
+
+                # Initialize schedules
+                section_schedules = {section_code: [] for section_code in section_codes}
+                room_schedules = {room[1]: [] for room in rooms}
+
                 year_subjects = subjects_by_year[year_num]
                 # Group subjects by subject code to handle Lecture and Lab together
                 subjects_by_code = {}
@@ -129,35 +144,109 @@ class CourseOfferingPage:
                 subject_codes_to_schedule = list(subjects_by_code.keys())
                 random.shuffle(subject_codes_to_schedule)  # Shuffle to vary
 
-                # While there are subjects to schedule
-                while subject_codes_to_schedule:
-                    if not section_letters:
-                        raise Exception(
-                            f"No more sections available for Year {year_num}"
-                            f" in Group {group}")
-                    section_letter = section_letters.pop(0)
-                    section_code = f"{year_num}{section_letter}"
+                # Identify NSTP 1
+                nstp1_subject_code = None
+                for subject_code in subject_codes_to_schedule:
+                    if subject_code.startswith('NSTP 1'):
+                        nstp1_subject_code = subject_code
+                        break  # Assuming only one NSTP 1 subject code
+                if nstp1_subject_code:
+                    # Schedule NSTP 1 for all sections at the same time
+                    # Remove NSTP 1 from subject_codes_to_schedule
+                    subject_codes_to_schedule.remove(nstp1_subject_code)
 
-                    # Initialize schedules
-                    section_schedule = []  # List of (day_pattern, time_slot)
-                    room_schedules = {}  # room_code: list of (day_pattern, time_slot)
+                    # Get NSTP 1 subject details
+                    nstp1_subject_list = subjects_by_code[nstp1_subject_code]
+                    lecture_subject = next(
+                        (s for s in nstp1_subject_list if s[6] == 'Lecture'),
+                        None)
+                    lab_subject = next(
+                        (s for s in nstp1_subject_list if s[6] == 'Lab'),
+                        None)
+                    # Prepare subjects to schedule
+                    subjects_to_schedule = []
+                    if lecture_subject:
+                        subjects_to_schedule.append(lecture_subject)
+                    if lab_subject:
+                        subjects_to_schedule.append(lab_subject)
+                    # Determine room list
+                    is_special = lecture_subject and lecture_subject[3] == 'Special'
+                    is_ntsp = is_special and lecture_subject[1].startswith('NSTP')
+                    if is_ntsp:
+                        available_rooms = [room for room in aud_rooms if room[2] == lecture_subject[6]]
+                    else:
+                        # Should not happen
+                        available_rooms = []
 
-                    for room in rooms:
-                        room_schedules[room[1]] = []
+                    # Shuffle time slots and day patterns to vary the schedule
+                    nstp_time_slots = time_slots.copy()
+                    nstp_day_patterns = day_patterns.copy()
+                    random.shuffle(nstp_time_slots)
+                    random.shuffle(nstp_day_patterns)
 
+                    # Try to find a time slot where the room is available
+                    scheduled = False
+                    for day_pattern in nstp_day_patterns:
+                        for time_slot in nstp_time_slots:
+                            # Check if time slot is available in all sections
+                            if any((day_pattern, time_slot) in section_schedules[section_code]
+                                   for section_code in section_codes):
+                                continue  # Time slot not available
+                            # Check room availability
+                            room_available = False
+                            for room in available_rooms:
+                                room_code = room[1]
+                                if (day_pattern, time_slot) not in room_schedules[room_code]:
+                                    # Room is available
+                                    assigned_room = room_code
+                                    room_available = True
+                                    break
+                            if not room_available:
+                                continue
+                            # Schedule NSTP 1 for all sections
+                            for section_code in section_codes:
+                                # Insert into database
+                                database.insert_course_offering(
+                                    subject_code=lecture_subject[1],
+                                    subject_description=lecture_subject[2],
+                                    room_code=assigned_room,
+                                    day_pattern=day_pattern,
+                                    time_slot=time_slot,
+                                    group=group,
+                                    section_code=section_code
+                                )
+                                # Mark the time slot as occupied
+                                section_schedules[section_code].append((day_pattern, time_slot))
+                                room_schedules[assigned_room].append((day_pattern, time_slot))
+                            scheduled = True
+                            break  # NSTP 1 scheduled
+                        if scheduled:
+                            break
+                    if not scheduled:
+                        # Could not schedule NSTP 1
+                        raise Exception(f"Could not schedule NSTP 1 for group {group}, year {year_num}")
+
+                # Now proceed to schedule other subjects per section
+                for section_code in section_codes:
+                    # Initialize per-section variables
+                    section_schedule = section_schedules[section_code]
+                    # Create a copy of subject_codes_to_schedule
+                    subjects_to_schedule_for_section = subject_codes_to_schedule.copy()
                     # Distribute subjects between MWF and TThS
                     day_pattern_subjects = {'MWF': [], 'TThS': []}
-                    # Alternate day patterns
-                    pattern_switch = True
-                    for subj_code in subject_codes_to_schedule:
-                        if pattern_switch:
+                    # Shuffle subjects to vary scheduling
+                    random.shuffle(subjects_to_schedule_for_section)
+                    for subj_code in subjects_to_schedule_for_section:
+                        if len(day_pattern_subjects['MWF']) <= len(day_pattern_subjects['TThS']):
                             day_pattern_subjects['MWF'].append(subj_code)
                         else:
                             day_pattern_subjects['TThS'].append(subj_code)
-                        pattern_switch = not pattern_switch
 
                     scheduled_subjects = []
                     for day_pattern in day_patterns:
+                        # Shuffle time slots to vary scheduling
+                        available_time_slots = time_slots.copy()
+                        random.shuffle(available_time_slots)
                         for subject_code in day_pattern_subjects[day_pattern]:
                             subject_list = subjects_by_code[subject_code]
                             # Ensure we have both Lecture and Lab types if applicable
@@ -169,20 +258,22 @@ class CourseOfferingPage:
                                 None)
 
                             # Prepare the pair of subjects to schedule together
-                            subjects_to_schedule = []
+                            subjects_to_schedule_pair = []
                             if lecture_subject:
-                                subjects_to_schedule.append(lecture_subject)
+                                subjects_to_schedule_pair.append(lecture_subject)
                             if lab_subject:
-                                subjects_to_schedule.append(lab_subject)
+                                subjects_to_schedule_pair.append(lab_subject)
 
                             # Determine room list based on subject requirements
                             is_minor = lecture_subject and lecture_subject[3] == 'Minor'
-                            is_ntsp = lecture_subject and lecture_subject[1] == 'NTSP'
-                            is_pe = lecture_subject and lecture_subject[1] == 'PE'
+                            is_special = lecture_subject and lecture_subject[3] == 'Special'
+                            is_ntsp = is_special and lecture_subject[1].startswith('NSTP')
+                            is_pe = is_special and lecture_subject[1].startswith('PE')
 
                             scheduled = False
-                            for i in range(len(time_slots) - len(subjects_to_schedule) + 1):
-                                time_slot_sequence = time_slots[i:i+len(subjects_to_schedule)]
+                            # Try all combinations of available time slots
+                            for i in range(len(available_time_slots) - len(subjects_to_schedule_pair) + 1):
+                                time_slot_sequence = available_time_slots[i:i+len(subjects_to_schedule_pair)]
                                 # Check if time slots are available in section schedule
                                 if any((day_pattern, ts) in section_schedule
                                        for ts in time_slot_sequence):
@@ -191,7 +282,7 @@ class CourseOfferingPage:
                                 # Check room availability for each subject
                                 rooms_available = True
                                 assigned_rooms = []
-                                for idx, subj in enumerate(subjects_to_schedule):
+                                for idx, subj in enumerate(subjects_to_schedule_pair):
                                     subj_type = subj[6]
                                     # Select rooms based on subject
                                     if is_minor:
@@ -199,14 +290,20 @@ class CourseOfferingPage:
                                                            if room[2] == subj_type]
                                         random.shuffle(available_rooms)  # Shuffle minor rooms
                                     elif is_ntsp:
-                                        available_rooms = [room for room in aud_rooms
-                                                           if room[2] == subj_type]
+                                        continue  # NSTP 1 already scheduled
                                     elif is_pe:
                                         available_rooms = [room for room in gym_rooms
                                                            if room[2] == subj_type]
                                     else:
                                         # General subjects
-                                        available_rooms = lecture_rooms if subj_type == 'Lecture' else lab_rooms
+                                        if subj_type == 'Lecture':
+                                            available_rooms = lecture_rooms.copy()
+                                        else:
+                                            available_rooms = lab_rooms.copy()
+                                        random.shuffle(available_rooms)  # Shuffle general rooms
+
+                                        # Exclude Gym and Aud from general subjects
+                                        available_rooms = [room for room in available_rooms if room[1] not in ['Gym', 'Aud']]
 
                                     if not available_rooms:
                                         rooms_available = False
@@ -228,7 +325,7 @@ class CourseOfferingPage:
                                     continue  # Try next time slot
 
                                 # Assign subjects to the time slots and rooms
-                                for idx, subj in enumerate(subjects_to_schedule):
+                                for idx, subj in enumerate(subjects_to_schedule_pair):
                                     room_code = assigned_rooms[idx]
                                     time_slot = time_slot_sequence[idx]
 
@@ -252,12 +349,15 @@ class CourseOfferingPage:
                             if scheduled:
                                 scheduled_subjects.append(subject_code)
                             else:
-                                continue  # Could not schedule this subject in this section
+                                raise Exception(
+                                    f"Could not schedule subject {subject_code} for section {section_code} "
+                                    f"in group {group}, year {year_num}"
+                                )
 
                     # Remove scheduled subjects from the list
                     for subj_code in scheduled_subjects:
-                        if subj_code in subject_codes_to_schedule:
-                            subject_codes_to_schedule.remove(subj_code)
+                        if subj_code in subjects_to_schedule_for_section:
+                            subjects_to_schedule_for_section.remove(subj_code)
 
     def refresh_offerings_list(self):
         """Refresh the list of course offerings displayed."""

@@ -10,12 +10,18 @@ def main():
     """Initialize the application."""
     database.create_tables()  # Create all necessary tables in the main database
 
-    tracks = database.fetch_tracks()
-    if not tracks:
-        database.add_track("Network & Security")
-        database.add_track("Web Technology")
-        database.add_track("Enterprise Resource Planning")
-        database.add_track("Minor")
+    # List of required tracks
+    required_tracks = [
+        "Network & Security",
+        "Web Technology",
+        "Enterprise Resource Planning",
+        "Minor",
+        "Special"  # Added the new "Special" track here
+    ]
+
+    # Add required tracks if they don't exist
+    for track in required_tracks:
+        database.add_track(track)
 
     root = tk.Tk()
     root.title("Track and Room Management System")
