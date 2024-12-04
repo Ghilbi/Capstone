@@ -86,8 +86,8 @@ class CourseOfferingPage:
             '6:10pm - 7:30pm'
         ]
 
-        # Days patterns
-        day_patterns = ['MWF', 'TThS']
+        # Individual Days
+        days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
         # Groups
         groups = ['A', 'B']
@@ -178,25 +178,25 @@ class CourseOfferingPage:
                         # Should not happen
                         available_rooms = []
 
-                    # Shuffle time slots and day patterns to vary the schedule
+                    # Shuffle time slots and days to vary the schedule
                     nstp_time_slots = time_slots.copy()
-                    nstp_day_patterns = day_patterns.copy()
+                    nstp_days = days.copy()
                     random.shuffle(nstp_time_slots)
-                    random.shuffle(nstp_day_patterns)
+                    random.shuffle(nstp_days)
 
                     # Try to find a time slot where the room is available
                     scheduled = False
-                    for day_pattern in nstp_day_patterns:
+                    for day in nstp_days:
                         for time_slot in nstp_time_slots:
                             # Check if time slot is available in all sections
-                            if any((day_pattern, time_slot) in section_schedules[section_code]
+                            if any((day, time_slot) in section_schedules[section_code]
                                    for section_code in section_codes):
                                 continue  # Time slot not available
                             # Check room availability
                             room_available = False
                             for room in available_rooms:
                                 room_code = room[1]
-                                if (day_pattern, time_slot) not in room_schedules[room_code]:
+                                if (day, time_slot) not in room_schedules[room_code]:
                                     # Room is available
                                     assigned_room = room_code
                                     room_available = True
@@ -210,14 +210,14 @@ class CourseOfferingPage:
                                     subject_code=lecture_subject[1],
                                     subject_description=lecture_subject[2],
                                     room_code=assigned_room,
-                                    day_pattern=day_pattern,
+                                    day_pattern=day,
                                     time_slot=time_slot,
                                     group=group,
                                     section_code=section_code
                                 )
                                 # Mark the time slot as occupied
-                                section_schedules[section_code].append((day_pattern, time_slot))
-                                room_schedules[assigned_room].append((day_pattern, time_slot))
+                                section_schedules[section_code].append((day, time_slot))
+                                room_schedules[assigned_room].append((day, time_slot))
                             scheduled = True
                             break  # NSTP 1 scheduled
                         if scheduled:
@@ -232,22 +232,22 @@ class CourseOfferingPage:
                     section_schedule = section_schedules[section_code]
                     # Create a copy of subject_codes_to_schedule
                     subjects_to_schedule_for_section = subject_codes_to_schedule.copy()
-                    # Distribute subjects between MWF and TThS
-                    day_pattern_subjects = {'MWF': [], 'TThS': []}
+                    # Distribute subjects between days
+                    day_subjects = {day: [] for day in days}
                     # Shuffle subjects to vary scheduling
                     random.shuffle(subjects_to_schedule_for_section)
+                    day_index = 0
                     for subj_code in subjects_to_schedule_for_section:
-                        if len(day_pattern_subjects['MWF']) <= len(day_pattern_subjects['TThS']):
-                            day_pattern_subjects['MWF'].append(subj_code)
-                        else:
-                            day_pattern_subjects['TThS'].append(subj_code)
+                        day = days[day_index % len(days)]
+                        day_subjects[day].append(subj_code)
+                        day_index += 1
 
                     scheduled_subjects = []
-                    for day_pattern in day_patterns:
+                    for day in days:
                         # Shuffle time slots to vary scheduling
                         available_time_slots = time_slots.copy()
                         random.shuffle(available_time_slots)
-                        for subject_code in day_pattern_subjects[day_pattern]:
+                        for subject_code in day_subjects[day]:
                             subject_list = subjects_by_code[subject_code]
                             # Ensure we have both Lecture and Lab types if applicable
                             lecture_subject = next(
@@ -275,7 +275,7 @@ class CourseOfferingPage:
                             for i in range(len(available_time_slots) - len(subjects_to_schedule_pair) + 1):
                                 time_slot_sequence = available_time_slots[i:i+len(subjects_to_schedule_pair)]
                                 # Check if time slots are available in section schedule
-                                if any((day_pattern, ts) in section_schedule
+                                if any((day, ts) in section_schedule
                                        for ts in time_slot_sequence):
                                     continue  # Time slots not available in section
 
@@ -305,6 +305,11 @@ class CourseOfferingPage:
                                         # Exclude Gym and Aud from general subjects
                                         available_rooms = [room for room in available_rooms if room[1] not in ['Gym', 'Aud']]
 
+                                    # Exclude M301, M303, M305, M307 on Saturdays
+                                    if day == 'Saturday':
+                                        excluded_rooms = ['M301', 'M303', 'M305', 'M307']
+                                        available_rooms = [room for room in available_rooms if room[1] not in excluded_rooms]
+
                                     if not available_rooms:
                                         rooms_available = False
                                         break  # No rooms of this type available
@@ -312,7 +317,7 @@ class CourseOfferingPage:
                                     # Find an available room
                                     for room in available_rooms:
                                         room_code = room[1]
-                                        if (day_pattern, time_slot_sequence[idx]) in room_schedules[room_code]:
+                                        if (day, time_slot_sequence[idx]) in room_schedules[room_code]:
                                             continue  # Room not available
                                         else:
                                             assigned_rooms.append(room_code)
@@ -334,15 +339,15 @@ class CourseOfferingPage:
                                         subject_code=subj[1],
                                         subject_description=subj[2],
                                         room_code=room_code,
-                                        day_pattern=day_pattern,
+                                        day_pattern=day,
                                         time_slot=time_slot,
                                         group=group,
                                         section_code=section_code
                                     )
 
                                     # Mark the time slots as occupied
-                                    section_schedule.append((day_pattern, time_slot))
-                                    room_schedules[room_code].append((day_pattern, time_slot))
+                                    section_schedule.append((day, time_slot))
+                                    room_schedules[room_code].append((day, time_slot))
 
                                 scheduled = True
                                 break  # Subjects scheduled, move to next
@@ -377,11 +382,21 @@ class CourseOfferingPage:
             '6:10pm - 7:30pm': 9
         }
 
+        # Define the day order
+        day_order = {
+            'Monday': 1,
+            'Tuesday': 2,
+            'Wednesday': 3,
+            'Thursday': 4,
+            'Friday': 5,
+            'Saturday': 6
+        }
+
         # Sort offerings for better presentation
         offerings.sort(key=lambda x: (
             x[5],  # group_name
             x[6],  # section_code
-            x[3],  # day_pattern
+            day_order.get(x[3], 0),  # day order
             time_slot_order.get(x[4], 0)  # time_slot order
         ))
 
@@ -400,7 +415,7 @@ class CourseOfferingPage:
             # Create a formatted string for display
             display_text = (
                 f"Subject: {subject_code} - {subject_description}\n"
-                f"Room: {room_code}, Days: {day_pattern}, Time: {time_slot}"
+                f"Room: {room_code}, Day: {day_pattern}, Time: {time_slot}"
             )
             self.offerings_listbox.insert('end', display_text)
             self.offerings_listbox.insert('end', "")  # Add an empty line

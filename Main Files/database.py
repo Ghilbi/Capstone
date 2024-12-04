@@ -23,6 +23,12 @@ def create_tables():
                         type TEXT,
                         FOREIGN KEY (track_id) REFERENCES Tracks(id))''')
 
+    # Check if "course" column exists in "Subjects" table; if not, add it
+    cursor.execute("PRAGMA table_info(Subjects)")
+    columns = [column[1] for column in cursor.fetchall()]
+    if 'course' not in columns:
+        cursor.execute('ALTER TABLE Subjects ADD COLUMN course TEXT')
+
     # Rooms Table
     cursor.execute('''CREATE TABLE IF NOT EXISTS Rooms (
                         id INTEGER PRIMARY KEY,
@@ -65,9 +71,9 @@ def get_track_name_by_id(track_id):
     track_row = cursor.fetchone()
     return track_row[0] if track_row else "All Tracks"
 
-def fetch_subjects(selected_track, selected_year_level, selected_trimester):
+def fetch_subjects(selected_track, selected_year_level, selected_trimester, selected_course):
     """Fetch subjects based on selected filters."""
-    query = '''SELECT s.id, s.subject_code, s.subject_description, t.track_name, s.year_level, s.trimester, s.type 
+    query = '''SELECT s.id, s.subject_code, s.subject_description, t.track_name, s.year_level, s.trimester, s.type, s.course 
                FROM Subjects s 
                LEFT JOIN Tracks t ON s.track_id = t.id 
                WHERE 1=1'''
@@ -85,6 +91,10 @@ def fetch_subjects(selected_track, selected_year_level, selected_trimester):
     if selected_trimester and selected_trimester != "All Trimesters":
         query += ' AND s.trimester = ?'
         params.append(selected_trimester)
+    
+    if selected_course and selected_course != "All Courses":
+        query += ' AND s.course = ?'
+        params.append(selected_course)
 
     cursor.execute(query, tuple(params))
     subjects = cursor.fetchall()
@@ -92,26 +102,26 @@ def fetch_subjects(selected_track, selected_year_level, selected_trimester):
 
 def fetch_all_subjects():
     """Fetch all subjects from the database."""
-    cursor.execute('''SELECT s.id, s.subject_code, s.subject_description, t.track_name, s.year_level, s.trimester, s.type 
+    cursor.execute('''SELECT s.id, s.subject_code, s.subject_description, t.track_name, s.year_level, s.trimester, s.type, s.course 
                       FROM Subjects s 
                       LEFT JOIN Tracks t ON s.track_id = t.id''')
     subjects = cursor.fetchall()
     return subjects
 
-def insert_subject(subject_code, subject_description, track_id, year_level, trimester, selected_type):
+def insert_subject(subject_code, subject_description, track_id, year_level, trimester, selected_type, course):
     """Insert a new subject into the database."""
-    cursor.execute('''INSERT INTO Subjects (subject_code, subject_description, track_id, year_level, trimester, type) 
-                      VALUES (?, ?, ?, ?, ?, ?)''', 
-                   (subject_code, subject_description, track_id, year_level, trimester, selected_type))
+    cursor.execute('''INSERT INTO Subjects (subject_code, subject_description, track_id, year_level, trimester, type, course) 
+                      VALUES (?, ?, ?, ?, ?, ?, ?)''', 
+                   (subject_code, subject_description, track_id, year_level, trimester, selected_type, course))
     conn.commit()
 
-def update_subject_db(subject_id, subject_code, subject_description, track_id, year_level, trimester, selected_type):
+def update_subject_db(subject_id, subject_code, subject_description, track_id, year_level, trimester, selected_type, course):
     """Update an existing subject in the database."""
     cursor.execute('''UPDATE Subjects 
                       SET subject_code = ?, subject_description = ?, track_id = ?, year_level = ?, 
-                          trimester = ?, type = ? 
+                          trimester = ?, type = ?, course = ? 
                       WHERE id = ?''', 
-                   (subject_code, subject_description, track_id, year_level, trimester, selected_type, subject_id))
+                   (subject_code, subject_description, track_id, year_level, trimester, selected_type, course, subject_id))
     conn.commit()
 
 def delete_subject_db(subject_id):
