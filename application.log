@@ -1,0 +1,6 @@
+2024-12-09 22:52:04,646 - INFO - Generating schedule for Program: BSCS, Year Level: First Year, Term: First Term, Section: FA
+2024-12-09 22:52:04,647 - DEBUG - Fetched subjects: []
+2024-12-09 22:52:04,647 - WARNING - No subjects found for Program: BSCS, Year Level: First Year, Term: First Term
+2024-12-09 22:52:08,192 - INFO - Generating schedule for Program: BSIT, Year Level: First Year, Term: First Term, Section: FA
+2024-12-09 22:52:08,193 - DEBUG - Fetched subjects: []
+2024-12-09 22:52:08,193 - WARNING - No subjects found for Program: BSIT, Year Level: First Year, Term: First Term
