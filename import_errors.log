@@ -1,3 +1,0 @@
-2024-12-09 22:23:29,783 - ERROR - Error loading data: [Errno 2] No such file or directory: 'SubjectsUC_CSV.csv'
-2024-12-09 22:27:22,671 - ERROR - Error getting subjects: invalid literal for int() with base 10: 'First Year'
-2024-12-09 22:27:26,325 - ERROR - Error getting subjects: invalid literal for int() with base 10: 'Third Year'
