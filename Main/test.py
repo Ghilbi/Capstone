@@ -178,46 +178,147 @@ def balance_and_shuffle_courses(courses: List[Course]) -> List[Course]:
 class SectionCreatorApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Section Creator")
+        self.root.title("Subject Offering")
+        self.root.geometry("460x700")
+        self.root.configure(bg="#f0f0f0")
         self.df = None
         self.programs = ["BSIT", "BSIT(WebTech)", "BSIT(Netsec)", "BSIT(ERP)", "BSCS", "BSDA", "BMMA"]
         self.setup_ui()
         
     def setup_ui(self):
+        # Create main container
+        main_container = ttk.Frame(self.root, padding="20")
+        main_container.grid(row=0, column=0, sticky="nsew")
+        
+        # Configure grid weights
+        self.root.grid_rowconfigure(0, weight=1)
+        self.root.grid_columnconfigure(0, weight=1)
+        
+        # Style configuration
+        style = ttk.Style()
+        style.configure("Title.TLabel", font=("Helvetica", 16, "bold"))
+        style.configure("Header.TLabel", font=("Helvetica", 12, "bold"))
+        style.configure("Custom.TLabelframe", padding=15)
+        style.configure("Action.TButton", padding=10)
+        
+        # Title
+        title_frame = ttk.Frame(main_container)
+        title_frame.grid(row=0, column=0, pady=(0, 20), sticky="ew")
+        ttk.Label(
+            title_frame, 
+            text="Section Schedule Generator", 
+            style="Title.TLabel"
+        ).pack()
+        
         # File import frame
-        import_frame = ttk.LabelFrame(self.root, text="Import Data", padding="10")
-        import_frame.grid(row=0, column=0, padx=10, pady=5, sticky="ew")
+        import_frame = ttk.LabelFrame(
+            main_container, 
+            text="Data Import", 
+            style="Custom.TLabelframe"
+        )
+        import_frame.grid(row=1, column=0, pady=(0, 20), sticky="ew")
         
-        ttk.Button(import_frame, text="Import CSV", command=self.import_csv).grid(row=0, column=0, padx=5)
+        self.file_label = ttk.Label(
+            import_frame, 
+            text="No file selected", 
+            font=("Helvetica", 10, "italic")
+        )
+        self.file_label.grid(row=0, column=1, padx=10)
         
-        # Section configuration frame
-        config_frame = ttk.LabelFrame(self.root, text="Configuration", padding="10")
-        config_frame.grid(row=1, column=0, padx=10, pady=5, sticky="ew")
+        ttk.Button(
+            import_frame, 
+            text="Import CSV File", 
+            command=self.import_csv,
+            style="Action.TButton"
+        ).grid(row=0, column=0, padx=10)
         
-        # Program section counts
-        self.section_counts = {}
-        row = 0
-        for program in self.programs:
-            ttk.Label(config_frame, text=f"{program} Sections:").grid(row=row, column=0, padx=5)
-            spinbox = ttk.Spinbox(config_frame, from_=1, to=10, width=5)
-            spinbox.grid(row=row, column=1, padx=5)
-            spinbox.set(1)
-            self.section_counts[program] = spinbox
-            row += 1
+        # Configuration frame
+        config_frame = ttk.LabelFrame(
+            main_container, 
+            text="Section Configuration", 
+            style="Custom.TLabelframe"
+        )
+        config_frame.grid(row=2, column=0, pady=(0, 20), sticky="ew")
         
         # Trimester selection
-        ttk.Label(config_frame, text="Trimester:").grid(row=row, column=0, padx=5)
+        trim_frame = ttk.Frame(config_frame)
+        trim_frame.grid(row=0, column=0, pady=(0, 15), sticky="ew")
+        
+        ttk.Label(
+            trim_frame, 
+            text="Trimester:", 
+            style="Header.TLabel"
+        ).grid(row=0, column=0, padx=(0, 10))
+        
         self.trimester_var = tk.StringVar(value="First")
-        trimester_combo = ttk.Combobox(config_frame, textvariable=self.trimester_var, values=["First", "Second", "Third"])
-        trimester_combo.grid(row=row, column=1, padx=5)
+        trimester_combo = ttk.Combobox(
+            trim_frame, 
+            textvariable=self.trimester_var,
+            values=["First", "Second", "Third"],
+            width=15,
+            state="readonly"
+        )
+        trimester_combo.grid(row=0, column=1)
+        
+        # Program sections configuration
+        sections_frame = ttk.Frame(config_frame)
+        sections_frame.grid(row=1, column=0, sticky="ew")
+        
+        ttk.Label(
+            sections_frame, 
+            text="Number of Sections per Program",
+            style="Header.TLabel"
+        ).grid(row=0, column=0, columnspan=2, pady=(0, 10))
+        
+        # Create two columns for program section counts
+        self.section_counts = {}
+        mid_point = len(self.programs) // 2 + len(self.programs) % 2
+        
+        for i, program in enumerate(self.programs):
+            col = 0 if i < mid_point else 1
+            row = i % mid_point + 1
+            
+            container = ttk.Frame(sections_frame)
+            container.grid(row=row, column=col, pady=5, padx=20, sticky="w")
+            
+            label = ttk.Label(
+                container, 
+                text=f"{program}:",
+                width=15,  # Fixed width for labels
+                anchor="e"  # Right-align the text
+            )
+            label.grid(row=0, column=0, padx=(0, 10))
+            
+            spinbox = ttk.Spinbox(
+                container, 
+                from_=1, 
+                to=10, 
+                width=5,
+                justify="center"
+            )
+            spinbox.grid(row=0, column=1, sticky="w")  # Left-align the spinbox
+            spinbox.set(1)
+            self.section_counts[program] = spinbox
         
         # Generate button
-        ttk.Button(self.root, text="Generate and Export", command=self.generate_sections).grid(row=2, column=0, pady=10)
+        generate_frame = ttk.Frame(main_container)
+        generate_frame.grid(row=3, column=0, pady=20)
+        
+        ttk.Button(
+            generate_frame,
+            text="Generate and Export Sections",
+            command=self.generate_sections,
+            style="Action.TButton",
+            width=30
+        ).pack()
         
     def import_csv(self):
         file_path = filedialog.askopenfilename(filetypes=[("CSV files", "*.csv")])
         if file_path:
             self.df = pd.read_csv(file_path)
+            file_name = file_path.split("/")[-1]
+            self.file_label.config(text=f"Selected file: {file_name}")
+            messagebox.showinfo("Success", "CSV file imported successfully!")
             
     def create_section_courses(self, program: str, year: str, trimester: str) -> List[Course]:
         # Filter courses for the specific program, year, and trimester
