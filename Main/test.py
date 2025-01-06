@@ -206,7 +206,7 @@ class SectionCreatorApp:
         title_frame.grid(row=0, column=0, pady=(0, 20), sticky="ew")
         ttk.Label(
             title_frame, 
-            text="Section Schedule Generator", 
+            text="Subject COurce Offering", 
             style="Title.TLabel"
         ).pack()
         
@@ -350,41 +350,45 @@ class SectionCreatorApp:
         # Create workbook for export
         wb = openpyxl.Workbook()
         
-        # Generate sections for Group A and B
-        for group_name in ['A', 'B']:
-            ws = wb.create_sheet(f"Group {group_name}")
-            row = 1
-            
-            for program in self.programs:
-                num_sections = int(self.section_counts[program].get())
-                for year in ['First', 'Second', 'Third']:
-                    # Generate sections for each year
-                    for section_num in range(num_sections):
-                        section_name = f"{year[0]}{section_num + 1}{group_name}"
-                        
-                        # Write section header
-                        ws.cell(row=row, column=1, value=f"{program}, {year} Year, {self.trimester_var.get()} Term Section {section_name}")
+        # Generate sections for each program
+        ws = wb.create_sheet("Sections")
+        row = 1
+        
+        for program in self.programs:
+            num_sections = int(self.section_counts[program].get())
+            for year in ['First', 'Second', 'Third']:
+                year_num = '1' if year == 'First' else '2' if year == 'Second' else '3'
+                
+                # Generate sections for each year
+                for section_num in range(num_sections):
+                    # Convert section number to letter (0=A, 1=B, etc.)
+                    section_letter = chr(65 + section_num)  # 65 is ASCII for 'A'
+                    # Create section name using year number and letter
+                    section_name = f"{year_num}{section_letter}"
+                    
+                    # Write section header
+                    ws.cell(row=row, column=1, value=f"{program}, {year} Year, {self.trimester_var.get()} Trimester Section {section_name}")
+                    row += 1
+                    
+                    # Write column headers
+                    headers = ["COURSE CODE", "DESCRIPTION", "TIME", "DAYS", "ROOM"]
+                    for col, header in enumerate(headers, 1):
+                        ws.cell(row=row, column=col, value=header)
+                    row += 1
+                    
+                    # Get courses for this section
+                    courses = self.create_section_courses(program, year, self.trimester_var.get())
+                    
+                    # Write courses
+                    for course in courses:
+                        ws.cell(row=row, column=1, value=course.code)
+                        ws.cell(row=row, column=2, value=course.description)
+                        ws.cell(row=row, column=3, value=course.time)
+                        ws.cell(row=row, column=4, value=course.days)
+                        ws.cell(row=row, column=5, value=course.room)
                         row += 1
-                        
-                        # Write column headers
-                        headers = ["COURSE CODE", "DESCRIPTION", "TIME", "DAYS", "ROOM"]
-                        for col, header in enumerate(headers, 1):
-                            ws.cell(row=row, column=col, value=header)
-                        row += 1
-                        
-                        # Get courses for this section
-                        courses = self.create_section_courses(program, year, self.trimester_var.get())
-                        
-                        # Write courses
-                        for course in courses:
-                            ws.cell(row=row, column=1, value=course.code)
-                            ws.cell(row=row, column=2, value=course.description)
-                            ws.cell(row=row, column=3, value=course.time)
-                            ws.cell(row=row, column=4, value=course.days)
-                            ws.cell(row=row, column=5, value=course.room)
-                            row += 1
-                        
-                        row += 1  # Add space between sections
+                    
+                    row += 1  # Add space between sections
         
         # Remove default sheet
         wb.remove(wb['Sheet'])
