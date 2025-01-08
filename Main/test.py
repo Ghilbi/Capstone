@@ -79,15 +79,16 @@ def get_available_rooms(course: Course, all_rooms: Set[str], year_level: str, tr
     lab_rooms = {'M303', 'M304', 'M305', 'M306', 'M307', 'N3001', 'N3002', 'S312'}
     major_rooms = {'M301', 'M303', 'M304', 'M305', 'M306', 'M307', 'N3001', 'N3002', 'S312'}
     major_subjects = {
-        'CC1', 'CC10', 'CC11', 'CC14', 'CC16', 'CC17', 'CC18', 'CC19', 'CC2', 
-        'CC21', 'CC23', 'CC24', 'CC3', 'CC4', 'CC5', 'CC6', 'CC7', 'CC8', 'CC9',
-        'CCS10', 'CCS12', 'CCS13', 'CCS15', 'CCS16', 'CCS2', 'CCS3', 'CCS5', 
-        'CCS6', 'CCS8', 'CCS9', 'CDA10', 'CDA11', 'CDA2', 'CDA3', 'CDA4', 'CDA5',
-        'CDA9', 'CIT1', 'CIT10', 'CIT12', 'CIT14', 'CIT15', 'CIT17', 'CIT18',
-        'CIT19', 'CIT22', 'CIT23', 'CIT24', 'CIT25', 'CIT3', 'CIT5', 'CIT6',
-        'CIT7', 'CIT9', 'CSS1', 'FL100', 'MCC1', 'MCC2', 'MCC3', 'MCC4', 'MCC5',
-        'MCC6', 'MCC8', 'MMC17', 'MMC18', 'MMC2', 'MMC3', 'MMC4', 'MMC5'
-    }
+    'CC1', 'CC10', 'CC11', 'CC12', 'CC13', 'CC14', 'CC15', 'CC16', 'CC17', 'CC18', 'CC19', 'CC2',
+    'CC21', 'CC22', 'CC23', 'CC24', 'CC3', 'CC4', 'CC5', 'CC6', 'CC7', 'CC8', 'CC9', 'CCS10',
+    'CCS11', 'CCS12', 'CCS13', 'CCS14', 'CCS15', 'CCS16', 'CCS2', 'CCS3', 'CCS4', 'CCS5', 'CCS6',
+    'CCS7', 'CCS8', 'CCS9', 'CDA1', 'CDA10', 'CDA11', 'CDA12', 'CDA2', 'CDA3', 'CDA4', 'CDA5',
+    'CDA6', 'CDA7', 'CDA8', 'CDA9', 'CIT1', 'CIT10', 'CIT11', 'CIT12', 'CIT14', 'CIT15', 'CIT16',
+    'CIT17', 'CIT18', 'CIT19', 'CIT26', 'CIT22', 'CIT23', 'CIT24', 'CIT25', 'CIT3', 'CIT4', 'CIT5',
+    'CIT6', 'CIT7', 'CIT8', 'CIT9', 'CCS1', 'MCC1', 'MCC2', 'MCC3', 'MCC4', 'MCC5', 'MCC6', 'MCC7', 
+    'MCC8', 'MM12', 'MMC1', 'MMC11', 'MMC13','MMC14', 'MMC15', 'MMC16', 'MMC17', 'MMC18', 'MMC19', 
+    'MMC2', 'MMC3', 'MMC4', 'MMC5', 'MMC6', 'MMC7', 'MMC8', 'MMC9', 'CIT13'
+}
     
     # Check if the course code matches any major subject code
     is_major = any(course.code.startswith(major_code) for major_code in major_subjects)
@@ -330,7 +331,7 @@ class SectionCreatorApp:
         # Create left column
         left_frame = ttk.Frame(sections_frame)
         left_frame.grid(row=1, column=0, padx=20, sticky="n")
-        
+
         current_row = 0
         for program in left_programs:
             # Program header
@@ -353,6 +354,20 @@ class SectionCreatorApp:
                 spinbox.grid(row=0, column=1)
                 spinbox.set(0)
                 self.section_counts[program][year] = spinbox
+                
+                current_row += 1
+            
+            # Add the "Third" spinbox specifically for "BSIT"
+            if program == "BSIT":
+                container = ttk.Frame(left_frame)
+                container.grid(row=current_row, column=0, pady=2, padx=20, sticky="w")
+                
+                ttk.Label(container, text="Third:", width=8, anchor="e").grid(row=0, column=0, padx=(0, 10))
+                
+                spinbox = ttk.Spinbox(container, from_=1, to=10, width=5, justify="center")
+                spinbox.grid(row=0, column=1)
+                spinbox.set(0)
+                self.section_counts[program]["Third"] = spinbox
                 
                 current_row += 1
             

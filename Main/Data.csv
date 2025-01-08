@@ -1,245 +1,359 @@
 Course_Code,Description,Time,Days,Room,Program,Year_Level,Trimester
 CC1,Computing Fundamentals(Lec),10:10am-11:30am,TTH,M304,BSDA,First,First
-CC1,Computing Fundamentals(Lab),11:30am-12:50pm,MWF,M303,BSCS,First,First
-CC1,Computing Fundamentals(Lec),11:30am-12:50pm,TTH,M304,BMMA,First,First
-CC1,Computing Fundamentals(Lec),12:50pm-2:10pm,MW,M304,BSCS,First,First
-CC1,Computing Fundamentals(Lab),12:50pm-2:10pm,TTHS,M303,BMMA,First,First
-CC1,Computing Fundamentals(Lec),7:30am-8:50am,MW,M304,BSIT,First,First
-CC1,Computing Fundamentals(Lab),8:50am-10:10am,MWF,M303,BSIT,First,First
-CC1,Computing Fundamentals(Lab),8:50am-10:10am,TTHS,M303,BSDA,First,First
-CC10,Introduction to Networks (Lab),7:30am-8:50am,MWF,M303,BSDA,Third,Second
-CC10,Introduction to Networks (Lec),8:50am-10:10am,MW,S311,BSDA,Third,Second
-CC11,Communication in the Workplace,12:50pm-2:10pm,MWF,N3001,BSCS,First,Second
-CC11,Communication in the Workplace,8:50am-10:10am,MWF,U706,BSDA,First,Second
-CC14,Web Application Development (Lab),3:30pm-4:50pm,MWF,M305,BSIT(ERP),Second,Second
-CC14,Web Application Development (Lec),4:50pm-6:10pm,MW,M301,BSIT(ERP),Second,Second
-CC14,Web Application Development (Lec),2:10pm-3:30pm,TTH,S312,BSIT(WebTech),Second,Second
-CC14,Web Application Development (Lab),3:30pm-4:50pm,TTHS,M305,BSIT(WebTech),Second,Second
-CC14,Web Application Development (Lab),12:50pm-2:10pm,MWF,M303,BSIT(Netsec),Second,Second
-CC14,Web Application Development (Lec),2:10pm-3:30pm,MWF,S312,BSIT(Netsec),Second,Second
-CC16,IT Security,6:10pm-7:30pm,TTHS,M301,BSCS,Third,First
-CC17,Mobile Application Design and Development(Lab),2:10pm-3:30pm,MWF,M305,BSCS,Third,First
-CC17,Mobile Application Design and Development(Lec),3:30pm-4:50pm,MW,S312,BSCS,Third,First
-CC17,Mobile Application Design and Development(Lec),4:50pm-6:10pm,TTHS,S312,BSIT(ERP),Third,First
-CC17,Mobile Application Design and Development(Lab),6:10pm-7:30pm,TTH,S312,BSIT(ERP),Third,First
-CC17,Mobile Application Design and Development(Lab),7:30am-8:50am,MWF,M307,BSIT(WebTech),Third,First
-CC17,Mobile Application Design and Development(Lec),7:30am-8:50am,MW,N3001,BSIT(Netsec),Third,First
-CC17,Mobile Application Design and Development(Lec),8:50am-10:10am,MWF,S122,BSIT(WebTech),Third,First
-CC17,Mobile Application Design and Development(Lab),8:50am-10:10am,MWF,N3001,BSIT(Netsec),Third,First
-CC18,Social and Professional Issues,3:30pm-4:50pm,TTHS,N3002,BSDA,Second,Second
-CC18,Social and Professional Issues,3:30pm-4:50pm,TTHS,N3002,BSIT(ERP),Second,Second
-CC18,Social and Professional Issues,3:30pm-4:50pm,MWF,U705,BSIT(WebTech),Second,Second
-CC18,Social and Professional Issues,4:50pm-6:10pm,MWF,M301,BSIT(Netsec),Second,Second
-CC18,Social and Professional Issues ,4:50pm-6:10pm,TTHS,M301,BSCS,Third,First
-CC19,Data Mining (Lab),2:10pm-3:30pm,TTHS,M305,BSCS,Second,Second
-CC19,Data Mining (Lec),3:30pm-4:50pm,TTH,M307,BSCS,Second,Second
-CC19,Data Mining (Lab),11:30am-12:50pm,MWF,M303,BSDA,Second,Second
-CC19,Data Mining (Lec),12:50pm-2:10pm,MW,S312,BSDA,Second,Second
-CC19,Data Mining (Lab),11:30am-12:50pm,MWF,M303,BSIT(ERP),Second,Second
-CC19,Data Mining (Lec),12:50pm-2:10pm,MW,S312,BSIT(ERP),Second,Second
+CIT9,Business Process Management,10:10am-11:30am,MWF,U705,BSIT(ERP),Second,First
+CC16,IT Security,10:10am-11:30am,MWF,M301,BSIT(Netsec),Second,Third
 CC19,Data Mining (Lec),10:10am-11:30am,TTH,S312,BSIT(WebTech),Second,Second
-CC19,Data Mining (Lab),11:30am-12:50pm,TTHS,M303,BSIT(WebTech),Second,Second
-CC19,Data Mining (Lab),8:50am-10:10am,MWF,M305,BSIT(Netsec),Second,Second
 CC19,Data Mining (Lec),10:10am-11:30am,MWF,S312,BSIT(Netsec),Second,Second
-CC2,Introduction to Computer Programming(Lec),11:30am-12:50pm,TTH,M304,BSCS,First,First
-CC2,Introduction to Computer Programming(Lab),12:50pm-2:10pm,TTHS,M303,BSCS,First,First
-CC2,Introduction to Computer Programming(Lab),7:30am-8:50am,TTHS,M303,BSIT,First,First
-CC2,Introduction to Computer Programming(Lec),7:30am-8:50am,MW,U402,BSDA,First,First
-CC2,Introduction to Computer Programming(Lec),8:50am-10:10am,TTH,M305,BSIT,First,First
-CC2,Introduction to Computer Programming(Lab),8:50am-10:10am,MWF,M307,BSDA,First,First
-CC2,Introduction to Computer Programming (Lab),12:50pm-2:10pm,TTHS,M303,BMMA,First,Second
-CC2,Introduction to Computer Programming (Lec),2:10pm-3:30pm,TTH,U402,BMMA,First,Second
-CC21,Introduction to ERP (Lec),7:30am-8:50am,TTH,S312,BSIT,First,Second
-CC21,Introduction to ERP (Lab),8:50am-10:10am,TTH,S312,BSIT,First,Second
-CC23,Calculus,12:50pm-2:10pm,MWF,U705,BSCS,Second,Second
-CC23,Calculus,12:50pm-2:10pm,TTH,M301,BSCS,Second,Second
-CC24,Probability Theory,12:50pm-2:10pm,TTHS,M305,BSCS,Second,First
 CC3,Object Oriented Programming(Lec),10:10am-11:30am,TTH,M307,BSCS,First,Second
-CC3,Object Oriented Programming(Lab),11:30am-12:50pm,TTHS,M304,BSCS,First,Second
-CC3,Object Oriented Programming (Lab),4:50pm-6:10pm,MWF,M304,BSIT,First,Second
-CC3,Object Oriented Programming (Lec),6:10pm-7:30pm,MW,M307,BSIT,First,Second
-CC3,Object Oriented Programming (Lec),11:30am-12:50pm,TTH,M307,BSDA,First,Second
-CC3,Object Oriented Programming (Lab),12:50pm-2:10pm,TTHS,M304,BSDA,First,Second
-CC4,Data Structures and Algorithms(Lec),7:30am-8:50am,MW,M307,BSCS,First,Second
-CC4,Data Structures and Algorithms(Lab),8:50am-10:10am,MWF,M304,BSCS,First,Second
-CC4,Data Structures and Algorithms (Lec),11:30am-12:50pm,TTH,M307,BSIT,First,Second
-CC4,Data Structures and Algorithms (Lab),12:50pm-2:10pm,TTHS,M304,BSIT,First,Second
-CC4,Data Structures and Algorithms (Lec),11:30am-12:50pm,MW,M307,BSDA,First,Second
-CC4,Data Structures and Algorithms (Lab),12:50pm-2:10pm,MWF,M304,BSDA,First,Second
-CC5,Information Management(Lec),2:10pm-3:30pm,TTH,M301,BSIT(Netsec),Second,First
-CC5,Information Management(Lec),3:30pm-4:50pm,TTH,M304,BSDA,Second,First
-CC5,Information Management(Lab),3:30pm-4:50pm,TTHS,M307,BSIT(Netsec),Second,First
-CC5,Information Management(Lab),4:50pm-6:10pm,TTHS,M307,BSDA,Second,First
-CC5,Information Management(Lab),4:50pm-6:10pm,MWF,FLD,BSIT(ERP),Second,First
-CC5,Information Management(Lec),6:10pm-7:30pm,MW,S122,BSIT(ERP),Second,First
-CC5,Information Management(Lec),7:30am-8:50am,MW,S312,BSIT(WebTech),Second,First
-CC5,Information Management(Lab),8:50am-10:10am,MWF,S312,BSIT(WebTech),Second,First
-CC5 ,Information Management(Lec),7:30am-8:50am,TTH,M301,BSCS,Second,First
-CC5 ,Information Management(Lab),8:50am-10:10am,TTHS,M305,BSCS,Second,First
-CC6,Emerging Technologies in IT,2:10pm-3:30pm,TTHS,N3001,BSIT(WebTech),Third,First
-CC6,Emerging Technologies in IT,4:50pm-6:10pm,MWF,M307,BSIT(Netsec),Third,First
-CC6,Emerging Technologies in IT,8:50am-10:10am,MWF,N5003,BSCS,Third,Second
-CC6,Emerging Technologies in IT,4:50pm-6:10pm,MWF,M307,BSDA,Third,Second
-CC6 ,Emerging Technologies in IT,12:50pm-2:10pm,MWF,M307,BSIT(ERP),Third,First
-CC7,Human Computer Interaction ,11:30am-12:50pm,MWF,M304,BSIT,First,First
-CC7,Human Computer Interaction,12:50pm-2:10pm,MWF,U402,BSDA,First,First
-CC7,Human Computer Interaction,7:30am-8:50am,TTHS,U705,BMMA,First,First
-CC7,Human Computer Interaction,8:50am-10:10am,MWF,M304,BSCS,First,First
-CC8,Introduction to Statistical Methods,11:30am-12:50pm,MWF,U706,BSCS,First,Second
-CC8,Introduction to Statistical Methods,2:10pm-3:30pm,SAT,M307,BSIT,First,Second
-CC8,Introduction to Statistical Methods,3:30pm-4:50pm,MWF,U706,BSDA,First,Second
-CC9,Discrete Structures,7:30am-8:50am,MWF,S122,BSDA,Second,First
-CCS10,Thesis Writing 2,6:10pm-7:30pm,TTHS,M303,BSCS,Third,Second
-CCS12,Graphics Design(Lab),10:10am-11:30am,MWF,M305,BMMA,Second,First
-CCS12,Graphics Design(Lec),10:10am-11:30am,TTH,M301,BMMA,Second,First
-CCS12,Graphics Design(Lab),2:10pm-3:30pm,MWF,M305,BSCS,Second,First
-CCS12,Graphics Design(Lec),2:10pm-3:30pm,TTH,M301,BSCS,Second,First
+MCC2,Foundations of Drawing(Lab),10:10am-11:30am,MWF,M301,BMMA,First,First
 CCS13,Optimization Theory,10:10am-11:30am,TTHS,U706,BSCS,Second,Second
 CCS15,Game Theory(Lab),10:10am-11:30am,TTHS,M303,BSCS,Third,First
-CCS15,Game Theory(Lec),11:30am-12:50pm,TTH,S312,BSCS,Third,First
-CCS16,Game Console Integration (Lab),4:50pm-6:10pm,MWF,M306,BSCS,Third,Second
-CCS16,Game Console Integration (Lec),6:10pm-7:30pm,MW,M306,BSCS,Third,Second
-CCS2,Design and Analysis of Algorithm,12:50pm-2:10pm,MWF,M301,BSCS,Second,First
-CCS3,Automata and Language Theory,11:30am-12:50pm,MWF,M301,BSCS,Second,Second
-CCS5,Computer Architecture and Organization,4:50pm-6:10pm,MWF,M304,BSCS,Second,First
 CCS6,Operating System,10:10am-11:30am,MWF,S312,BSCS,Third,First
-CCS8,Software Engineering (Lab),3:30pm-4:50pm,MWF,M305,BSCS,Second,Second
-CCS8,Software Engineering (Lec),4:50pm-6:10pm,MW,S312,BSCS,Second,Second
-CCS9,Thesis Writing 1,6:10pm-7:30pm,MWF,M303,BSCS,Third,First
-CDA2,Relational and NoSQL Databases,3:30pm-4:50pm,MWF,F506,BSDA,Second,First
-CDA3,Big Data Fundamentals,12:50pm-2:10pm,MWF,U402,BSDA,Second,First
-CDA4,Programming for Data Analytics(Lab),11:30am-12:50pm,TTHS,M307,BSDA,Second,First
-CDA4,Programming for Data Analytics(Lec),12:50pm-2:10pm,TTH,M304,BSDA,Second,First
-CDA10,Data Analytics Capstone Project 1,6:10pm-7:30pm,MWF,M305,BSDA,Third,First
-CDA11,Data Analytics Capstone Project 2,6:10pm-7:30pm,TTHS,M304,BSDA,Third,Second
-CDA5,Data Warehousing Fundamentals (Lab),11:30am-12:50pm,TTHS,M306,BSDA,Second,Second
-CDA5,Data Warehousing Fundamentals (Lec),12:50pm-2:10pm,TTH,M301,BSDA,Second,Second
-CDA9,Machine LEarning Fundamentals(Lab),3:30pm-4:50pm,MWF,M305,BSDA,Third,First
-CDA9,Machine LEarning Fundamentals(Lec),4:50pm-6:10pm,MW,S106,BSDA,Third,First
-CIT9,Business Process Management,10:10am-11:30am,MWF,U705,BSDA,Second,First
-CIT9,Business Process Management,10:10am-11:30am,MWF,U705,BSIT(ERP),Second,First
-CIT1,Quantitative Analysis,11:30am-12:50pm,MWF,S122,BSIT(ERP),Second,First
-CIT1,Quantitative Analysis,11:30am-12:50pm,TTHS,S321,BSIT(Netsec),Second,First
-CIT1,Quantitative Analysis,2:10pm-3:30pm,MWF,S312,BSIT(WebTech),Second,First
-CIT1,Quantitative Analysis,7:30am-8:50am,MWF,U705,BSDA,Second,Second
-CIT10,ERP Configuration (Lab),11:30am-12:50pm,TTHS,M306,BSIT(ERP),Second,Second
-CIT10,ERP Configuration (Lec),12:50pm-2:10pm,TTH,M301,BSIT(ERP),Second,Second
-CIT12,ABAP Programming 2 (Lab),11:30am-12:50pm,TTHS,M307,BSIT(ERP),Third,First
-CIT12,ABAP Programming 2 (Lec),12:50pm-2:10pm,TTH,M304,BSIT(ERP),Third,First
-CIT14,WEB TECHNOLOGIES (Lec),3:30pm-4:50pm,TTH,M304,BSIT(WebTech),Second,First
-CIT14,WEB TECHNOLOGIES (Lab),4:50pm-6:10pm,TTHS,M303,BSIT(WebTech),Second,First
-CIT15,Multimedia Systems (Lab),8:50am-10:10am,MWF,M303,BSIT(WebTech),Second,Second
 CIT15,Multimedia Systems (Lec),10:10am-11:30am,MW,M307,BSIT(WebTech),Second,Second
-CIT17,Web Information System(Lec),11:30am-12:50pm,TTH,S122,BSIT(WebTech),Third,First
-CIT17,Web Information System(Lab),12:50pm-2:10pm,TTHS,M306,BSIT(WebTech),Third,First
-CIT18,Mastery in Web Technology (Lab),7:30am-8:50am,TTHS,M305,BSIT(WebTech),Third,Second
-CIT19,Mastery in Networks(Lab),7:30am-8:50am,TTHS,M303,BSIT(Netsec),Second,First
-CIT19,Mastery in Networks(Lec),8:50am-10:10am,TTH,S312,BSIT(Netsec),Second,First
-CIT22,Mastery in Network Administration (Lab),12:50pm-2:10pm,TTHS,M306,BSIT(Netsec),Third,First
-CIT22,Mastery in Network Administration (Lec),2:10pm-3:30pm,TTH,S122,BSIT(Netsec),Third,First
-CIT23,Firewalls and Network Security (Lec),7:30am-8:50am,TTH,M303,BSIT(Netsec),Third,Second
-CIT23,Firewalls and Network Security (Lab),8:50am-10:10am,TTHS,M303,BSIT(Netsec),Third,Second
 CIT24,"Switching, Routing, and Wireless Essentials (Lab)",10:10am-11:30am,MWF,M307,BSIT(Netsec),Second,First
-CIT24,"Switching, Routing, and Wireless Essentials (Lec)",11:30am-12:50pm,TTH,M307,BSIT(WebTech),Second,First
-CIT24,"Switching, Routing, and Wireless Essentials (Lab)",12:50pm-2:10pm,TTHS,M307,BSIT(WebTech),Second,First
-CIT24,"Switching, Routing, and Wireless Essentials (Lab)",7:30am-8:50am,TTHS,M307,BSIT(ERP),Second,First
-CIT24,"Switching, Routing, and Wireless Essentials (Lec)",8:50am-10:10am,TTH,S312,BSIT(ERP),Second,First
-CIT24,"Switching, Routing, and Wireless Essentials (Lec)",8:50am-10:10am,MW,M307,BSIT(Netsec),Second,First
-CIT25,"Enterprise Networking, Security, and Automation (Lab)",4:50pm-6:10pm,TTH,M305,BSIT(Netsec),Second,Second
-CIT25,"Enterprise Networking, Security, and Automation (Lec)",6:10pm-7:30pm,TTH,M301,BSIT(Netsec),Second,Second
-CIT3,IT Project Management,7:30am-8:50am,TTHS,U402,BSDA,Second,Second
-CIT3,IT Project Management,7:30am-8:50am,TTHS,U402,BSIT(ERP),Second,Second
-CIT3,IT Project Management,2:10pm-3:30pm,MWF,U705,BSIT(WebTech),Second,Second
-CIT3,IT Project Management,11:30am-12:50pm,TTHS,U402,BSIT(Netsec),Second,Second
-CIT5,Accounting Essentials,11:30am-12:50pm,TTHS,S122,BSIT(ERP),Second,First
-CIT5,Accounting Essentials,11:30am-12:50pm,MWF,S312,BSIT(Netsec),Second,First
-CIT5,Accounting Essentials,12:50pm-2:10pm,MWF,FLD,BSIT(WebTech),Second,First
-CIT6,Capstone Project 1,2:10pm-3:30pm,MWF,M306,BSIT(WebTech),Third,First
-CIT6,Capstone Project 1,4:50pm-6:10pm,MWF,M303,BSIT(ERP),Third,First
-CIT6,Capstone Project 1,6:10pm-7:30pm,MWF,M303,BSIT(Netsec),Third,First
-CIT7,Capstone Project 2,4:50pm-6:10pm,MWF,M303,BSIT(WebTech),Third,Second
-CIT7,Capstone Project 2,7:30am-8:50am,MWF,M306,BSIT(Netsec),Third,Second
-CORDI101,Cordillera: History and Socio-Cultural Heritage,8:50am-10:10am,MWF,U806,BSCS,Second,Second
-CORDI101,Cordillera: History and Socio-Cultural Heritage,8:50am-10:10am,MWF,S231,BSDA,Second,Second
-CORDI101,Cordillera: History and Socio-Cultural Heritage,8:50am-10:10am,MWF,S231,BSIT(ERP),Second,Second
-CORDI101,Cordillera: History and Socio-Cultural Heritage,7:30am-8:50am,TTHS,U402,BSIT(WebTech),Second,Second
-CORDI101,Cordillera: History and Socio-Cultural Heritage,3:30pm-4:50pm,TTHS,S231,BSIT(Netsec),Second,Second
-CORDI101,Cordillera: History and Socio-Cultural Heritage,7:30am-8:50am,TTHS,F502,BMMA,Second,Second
-CSS1,Physics,2:10pm-3:30pm,TTHS,M301,BSCS,First,Second
-Engl100,Purposive Communication,11:30am-12:50pm,MWF,U402,BSDA,First,First
-Engl100,Purposive Communication,12:50pm-2:10pm,TTHS,U705,BSIT,First,First
-Engl100,Purposive Communication,3:30pm-4:50pm,MWF,Aud,BSCS,First,First
-Engl100,Purposive Communication,8:50am-10:10am,TTHS,U706,BMMA,First,First
-FL100,Foreign Culture and Language,2:10pm-3:30pm,MWF,U703,BSDA,Second,Second
-Hist100,Readings in Philippine History,12:50pm-2:10pm,MWF,U706,BSIT,First,First
-Hist100,Readings in Philippine History,3:30pm-4:50pm,MWF,U402,BSDA,First,First
-Hist100,Readings in Philippine History,7:30am-8:50am,MWF,U706,BSCS,First,First
-Hist100,Readings in Philippine History,7:30am-8:50am,TTHS,U402,BMMA,Second,First
-Hist101,The Life and Works of Rizal,8:50am-10:10am,TTHS,U806,BMMA,Second,Second
-Hist101,The Life and Works of Rizal,8:50am-10:10am,TTHS,S231,BSIT(WebTech),Third,Second
-Hist101,Mastery in Web Technology (Lec),6:10pm-7:30pm,TTH,M307,BSIT(WebTech),Third,Second
+CIT9,Business Process Management,10:10am-11:30am,MWF,U705,BSDA,Second,First
+CIT1,Quantitative Analysis,11:30am-12:50pm,MWF,S122,BSIT(ERP),Second,First
+FL100,Foreign Culture and Language,10:10am-11:30am,TTHS,U402,BSIT(WebTech),Second,Third
 Hist101,The Life and Works of Rizal,10:10am-11:30am,MWF,U705,BSIT(Netsec),Third,Second
-Math100,Mathematics in the Modern World,11:30am-12:50pm,TTHS,U706,BSIT,First,First
-Math100,Mathematics in the Modern World,12:50pm-2:10pm,TTHS,U402,BSDA,First,First
-Math100,Mathematics in the Modern World,2:10pm-3:30pm,MWF,U706,BMMA,First,First
-Math100,Mathematics in the Modern World,8:50am-10:10am,TTHS,U706,BSCS,First,First
-MCC1,Introduction to Multimedia Arts,7:30am-8:50am,MWF,M301,BMMA,First,First
-MCC2,Foundations of Drawing(Lab),10:10am-11:30am,MWF,M301,BMMA,First,First
+CC1,Computing Fundamentals(Lec),11:30am-12:50pm,TTH,M304,BMMA,First,First
 MCC2,Foundations of Drawing(Lec),11:30am-12:50pm,MW,M301,BMMA,First,First
-MCC3,History of Visual Design,8:50am-10:10am,MWF,U402,BMMA,First,Second
-MCC4,Advanced Drawing and Construction Techniques (Lec),2:10pm-3:30pm,MW,M301,BMMA,First,Second
-MCC4,Advanced Drawing and Construction Techniques (Lab),3:30pm-4:50pm,MWF,M301,BMMA,First,Second
-MCC5,Fundamentals of Design (Lec),10:10am-11:30am,MW,S312,BMMA,First,Second
-MCC5,Fundamentals of Design (Lab),11:30am-12:50pm,MWF,M305,BMMA,First,Second
-MCC6,Writing for New Media,11:30am-12:50pm,TTHS,U402,BMMA,First,Second
-MCC8,Research Methods,11:30am-12:50pm,TTHS,M304,BMMA,Second,Second
-MMC17,Theory of Games,12:50pm-2:10pm,MWF,M305,BMMA,Second,First
-MMC18,Game Design (Lab),7:30am-8:50am,MWF,M304,BMMA,Second,Second
-MMC18,Game Design (Lec),10:10am-11:30am,MWF,M304,BMMA,Second,Second
-MMC2,2D Animation Techniques(Lec),2:10pm-3:30pm,TTH,U705,BMMA,Second,First
-MMC2,2D Animation Techniques(Lab),3:30pm-4:50pm,TTHS,M305,BMMA,Second,First
-MMC3,3D Modelling and Scene Design(Lab),11:30am-12:50pm,MWF,M305,BMMA,Second,First
-MMC3,3D Modelling and Scene Design(Lec),11:30am-12:50pm,TTH,M301,BMMA,Second,First
-MMC4,Typography and Layout (Lab),3:30pm-4:50pm,MWF,M304,BMMA,Second,Second
-MMC4,Typography and Layout (Lec),4:50pm-6:10pm,MWF,M306,BMMA,Second,Second
-MMC5,3D Animation Techniques (Lec),4:50pm-6:10pm,TTH,M306,BMMA,Second,Second
-MMC5,3D Animation Techniques (Lab),6:10pm-7:30pm,TTHS,M304,BMMA,Second,Second
-NSTP1,National Service Training Program 1,3:30pm-4:50pm,TTHS,Aud,BSIT,First,First
-NSTP1,National Service Training Program 1,3:30pm-4:50pm,TTHS,Aud,BSCS,First,First
-NSTP1,National Service Training Program 1,3:30pm-4:50pm,MWF,Aud,BMMA,First,First
-NSTP1,National Service Training Program 1,4:50pm-6:10pm,TTHS,Aud,BSDA,First,First
-PathFit1,Movement Contemporary Training,3:30pm-4:50pm,MW,Gym,BSIT,First,First
-PathFit1,Movement Contemporary Training,2:10pm-3:30pm,TTH,Gym,BSDA,First,First
-PathFit1,Movement Contemporary Training,3:30pm-4:50pm,TTH,Gym,BMMA,First,First
-PathFit1,Movement Contemporary Training,7:30am-8:50am,TTH,Gym,BSCS,First,First
-PathFit2,Exsercised-based Fitness Activties,3:30pm-4:50pm,TTH,Gym,BSCS,First,Second
+CC1,Computing Fundamentals(Lab),12:50pm-2:10pm,TTHS,M303,BMMA,First,First
+Math100,Mathematics in the Modern World,2:10pm-3:30pm,MWF,U706,BMMA,First,First
 PathFit2,Exercise-based Fitness Activities,10:10am-11:30am,MW,Gym,BSIT,First,Second
-PathFit2,Exercise-based Fitness Activities,4:50pm-6:10pm,TTH,Gym,BSDA,First,Second
-PathFit2,Exercise-based Fitness Activities,4:50pm-6:10pm,MW,Gym,BMMA,First,Second
+NSTP1,National Service Training Program 1,3:30pm-4:50pm,MWF,Aud,BMMA,First,First
 PathFit4,Outdoor and Adventure Activities,10:10am-11:30am,MW ,Gym,BSCS,Second,First
 PathFit4,Outdoor and Adventure Activities,10:10am-11:30am,TTH,Gym,BSIT(WebTech),Second,First
-PathFit4,Outdoor and Adventure Activities,2:10pm-3:30pm,MW,Gym,BSDA,Second,First
+Science100,"Science, Technology and Society",10:10am-11:30am,TTHS,U706,BSCS,Second,Third
+CIT5,Accounting Essentials,11:30am-12:50pm,TTHS,S122,BSIT(ERP),Second,First
 PathFit4,Outdoor and Adventure Activities,2:10pm-3:30pm,MW,Gym,BSIT(ERP),Second,First
-PathFit4,Outdoor and Adventure Activities,3:30pm-4:50pm,MW,Gym,BSIT(Netsec),Second,First
-PathFit4,Outdoor and Adventure Activities,4:50pm-6:10pm,MW ,Gym,BMMA,Second,First
-Psych100,Understanding the Self,3:30pm-4:50pm,MWF,U703,BSCS,First,Second
-Psych100,Understanding the Self,8:50am-10:10am,MWF,U806,BSIT,First,Second
-Psych100,Understanding the Self,7:30am-8:50am,MWF,U706,BSDA,First,Second
-Psych100,Understanding the Self,7:30am-8:50am,TTHS,N5003,BMMA,First,Second
-Science100,"Science, Technology and Society",10:10am-11:30am,TTHS,N5003,BSIT(ERP),Second,Second
-Science100,"Science, Technology and Society",6:10pm-7:30pm,TTHS,S231,BSIT(WebTech),Second,Second
-Science100,"Science, Technology and Society",12:50pm-2:10pm,TTHS,M305,BSIT(Netsec),Second,Second
-SocSci101N,Ethics,8:50am-10:10am,MWF,U705,BSCS,Second,First
-SocSci100,Art Appreciation,7:30am-8:50am,TTHS,S231,BSDA,First,Second
+SocSci101N,Ethics,10:10am-11:30am,TTHS,U705,BSDA,First,Third
 SocSci101N,Ethics,10:10am-11:30am,MWF,U402,BSIT(WebTech),Second,First
+CC1,Computing Fundamentals(Lab),11:30am-12:50pm,MWF,M303,BSCS,First,First
+PathFit1,Movement Contemporary Training,3:30pm-4:50pm,TTH,Gym,BMMA,First,First
+CC10,Introduction to Networks(Lab),11:30am-12:50pm,MWF,S312,BSIT,First,Third
 SocSci101N,Ethics,2:10pm-3:30pm,TTHS,U402,BSIT(ERP),Second,First
-SocSci101N,Ethics,2:10pm-3:30pm,MWF,U402,BSIT(Netsec),Second,First
+CC15,Systems Integration and Architecture,11:30am-12:50pm,TTHS,M304,BSIT(Netsec),Second,Third
+CC19,Data Mining (Lab),11:30am-12:50pm,MWF,M303,BSDA,Second,Second
+CC5,Information Management(Lab),4:50pm-6:10pm,MWF,FLD,BSIT(ERP),Second,First
+CC19,Data Mining (Lab),11:30am-12:50pm,TTHS,M303,BSIT(WebTech),Second,Second
+CC2,Introduction to Computer Programming(Lec),11:30am-12:50pm,TTH,M304,BSCS,First,First
+CC22,Introduction to Platform Technologies (Lab),11:30am-12:50pm,TTHS,M307,BSIT,First,Third
+CC3,Object Oriented Programming (Lec),11:30am-12:50pm,TTH,M307,BSDA,First,Second
+CC3,Object Oriented Programming(Lab),11:30am-12:50pm,TTHS,M304,BSCS,First,Second
+CC4,Data Structures and Algorithms (Lec),11:30am-12:50pm,TTH,M307,BSIT,First,Second
+CC4,Data Structures and Algorithms (Lec),11:30am-12:50pm,MW,M307,BSDA,First,Second
+CC7,Human Computer Interaction ,11:30am-12:50pm,MWF,M304,BSIT,First,First
+CC8,Introduction to Statistical Methods,11:30am-12:50pm,MWF,U706,BSCS,First,Second
+CC9,Discrete Structures,11:30am-12:50pm,TTHS,U705,BSCS,First,Third
+CC7,Human Computer Interaction,7:30am-8:50am,TTHS,U705,BMMA,First,First
+CCS15,Game Theory(Lec),11:30am-12:50pm,TTH,S312,BSCS,Third,First
+CCS3,Automata and Language Theory,11:30am-12:50pm,MWF,M301,BSCS,Second,Second
+CDA4,Programming for Data Analytics(Lab),11:30am-12:50pm,TTHS,M307,BSDA,Second,First
+CDA5,Data Warehousing Fundamentals (Lab),11:30am-12:50pm,TTHS,M306,BSDA,Second,Second
+CC5,Information Management(Lec),6:10pm-7:30pm,MW,S122,BSIT(ERP),Second,First
+CIT1,Quantitative Analysis,11:30am-12:50pm,TTHS,S321,BSIT(Netsec),Second,First
+CIT24,"Switching, Routing, and Wireless Essentials (Lab)",7:30am-8:50am,TTHS,M307,BSIT(ERP),Second,First
+CIT24,"Switching, Routing, and Wireless Essentials (Lec)",8:50am-10:10am,TTH,S312,BSIT(ERP),Second,First
+CIT17,Web Information System(Lec),11:30am-12:50pm,TTH,S122,BSIT(WebTech),Third,First
+CIT24,"Switching, Routing, and Wireless Essentials (Lec)",11:30am-12:50pm,TTH,M307,BSIT(WebTech),Second,First
+CIT3,IT Project Management,11:30am-12:50pm,TTHS,U402,BSIT(Netsec),Second,Second
+CIT4,Introduction to Integrative Programming andd Technologies (Lec),11:30am-12:50pm,MW,S312,BSIT(WebTech),Second,Third
+Science100,"Science, Technology and Society",10:10am-11:30am,TTHS,N5003,BSIT(ERP),Second,Second
+CIT5,Accounting Essentials,11:30am-12:50pm,MWF,S312,BSIT(Netsec),Second,First
+Engl100,Purposive Communication,11:30am-12:50pm,MWF,U402,BSDA,First,First
+CC19,Data Mining (Lab),11:30am-12:50pm,MWF,M303,BSIT(ERP),Second,Second
+FL100,Foreign Culture and Language,11:30am-12:50pm,MWF,U705,BSCS,Second,Third
+Math100,Mathematics in the Modern World,11:30am-12:50pm,TTHS,U706,BSIT,First,First
+MCC1,Introduction to Multimedia Arts,7:30am-8:50am,MWF,M301,BMMA,First,First
+Engl100,Purposive Communication,8:50am-10:10am,TTHS,U706,BMMA,First,First
+CCS12,Graphics Design(Lab),10:10am-11:30am,MWF,M305,BMMA,Second,First
+CCS12,Graphics Design(Lec),10:10am-11:30am,TTH,M301,BMMA,Second,First
+MMC3,3D Modelling and Scene Design(Lab),11:30am-12:50pm,MWF,M305,BMMA,Second,First
+MMC3,3D Modelling and Scene Design(Lec),11:30am-12:50pm,TTH,M301,BMMA,Second,First
+Science100,"Science, Technology and Society",11:30am-12:50pm,MWF,U402,BSDA,Second,Third
+SocSci103N,The Contemporary World,11:30am-12:50pm,MWF,U706,BSCS,First,Third
+MMC17,Theory of Games,12:50pm-2:10pm,MWF,M305,BMMA,Second,First
+CC1,Computing Fundamentals(Lec),12:50pm-2:10pm,MW,M304,BSCS,First,First
+CC10,Introduction to Networks(Lab),12:50pm-2:10pm,TTHS,M303,BSCS,First,Third
+CC10,Introduction to Networks(Lec),12:50pm-2:10pm,MW,S312,BSIT,First,Third
+CC11,Communication in the Workplace,12:50pm-2:10pm,MWF,N3001,BSCS,First,Second
+CC13,Systems Analysis and Design,12:50pm-2:10pm,MWF,M301,BSCS,First,Third
+CC13,Systems Analysis and Design,12:50pm-2:10pm,MWF,M301,BSDA,First,Third
+CC14,Web Application Development (Lab),12:50pm-2:10pm,MWF,M303,BSIT(Netsec),Second,Second
+CC15,Systems Integration and Architecture,12:50pm-2:10pm,MWF,M307,BSCS,Second,Third
+CC19,Data Mining (Lec),12:50pm-2:10pm,MW,S312,BSDA,Second,Second
+CIT10,ERP Configuration (Lab),11:30am-12:50pm,TTHS,M306,BSIT(ERP),Second,Second
+CC2,Introduction to Computer Programming(Lab),12:50pm-2:10pm,TTHS,M303,BSCS,First,First
+CC22,Introduction to Platform Technologies (Lec),12:50pm-2:10pm,TTH,M304,BSIT,First,Third
+CC23,Calculus,12:50pm-2:10pm,TTH,M301,BSCS,Second,Second
+CC23,Calculus,12:50pm-2:10pm,MWF,U705,BSCS,Second,Second
+CC24,Probability Theory,12:50pm-2:10pm,TTHS,M305,BSCS,Second,First
+CC3,Object Oriented Programming (Lab),12:50pm-2:10pm,TTHS,M304,BSDA,First,Second
+CC4,Data Structures and Algorithms (Lab),12:50pm-2:10pm,TTHS,M304,BSIT,First,Second
+CC4,Data Structures and Algorithms (Lab),12:50pm-2:10pm,MWF,M304,BSDA,First,Second
+CC19,Data Mining (Lec),12:50pm-2:10pm,MW,S312,BSIT(ERP),Second,Second
+CC7,Human Computer Interaction,12:50pm-2:10pm,MWF,U402,BSDA,First,First
+CCS2,Design and Analysis of Algorithm,12:50pm-2:10pm,MWF,M301,BSCS,Second,First
+CCS4,Programming Languages,12:50pm-2:10pm,TTHS,M307,BSCS,Second,Third
+CDA3,Big Data Fundamentals,12:50pm-2:10pm,MWF,U402,BSDA,Second,First
+CDA4,Programming for Data Analytics(Lec),12:50pm-2:10pm,TTH,M304,BSDA,Second,First
+CDA5,Data Warehousing Fundamentals (Lec),12:50pm-2:10pm,TTH,M301,BSDA,Second,Second
+CDA7,Data Visualization Fundamentals,12:50pm-2:10pm,TTHS,S312,BSDA,Second,Third
+CIT10,ERP Configuration (Lec),12:50pm-2:10pm,TTH,M301,BSIT(ERP),Second,Second
+CC14,Web Application Development (Lab),3:30pm-4:50pm,MWF,M305,BSIT(ERP),Second,Second
+CIT17,Web Information System(Lab),12:50pm-2:10pm,TTHS,M306,BSIT(WebTech),Third,First
+CIT22,Mastery in Network Administration (Lab),12:50pm-2:10pm,TTHS,M306,BSIT(Netsec),Third,First
+CIT24,"Switching, Routing, and Wireless Essentials (Lab)",12:50pm-2:10pm,TTHS,M307,BSIT(WebTech),Second,First
+CIT4,Introduction to Integrative Programming andd Technologies (Lab),12:50pm-2:10pm,MWF,S312,BSIT(WebTech),Second,Third
+CIT5,Accounting Essentials,12:50pm-2:10pm,MWF,FLD,BSIT(WebTech),Second,First
+MMC2,2D Animation Techniques(Lec),2:10pm-3:30pm,TTH,U705,BMMA,Second,First
+Engl100,Purposive Communication,12:50pm-2:10pm,TTHS,U705,BSIT,First,First
+FL100,Foreign Culture and Language,12:50pm-2:10pm,MWF,U402,BSIT(Netsec),Second,Third
+Hist100,Readings in Philippine History,12:50pm-2:10pm,MWF,U706,BSIT,First,First
+Math100,Mathematics in the Modern World,12:50pm-2:10pm,TTHS,U402,BSDA,First,First
+MMC2,2D Animation Techniques(Lab),3:30pm-4:50pm,TTHS,M305,BMMA,Second,First
 SocSci101N,Ethics,3:30pm-4:50pm,MWF,S106,BMMA,Second,First
+PathFit4,Outdoor and Adventure Activities,4:50pm-6:10pm,MW ,Gym,BMMA,Second,First
+PathFit3,Martial Arts,12:50pm-2:10pm,TTH,Gym,BSDA,First,Third
+Science100,"Science, Technology and Society",12:50pm-2:10pm,TTHS,M305,BSIT(Netsec),Second,Second
 SocSci103N,The Contemporary World,12:50pm-2:10pm,MWF,S122,BSIT(WebTech),Third,First
+CC10,Introduction to Networks(Lec),2:10pm-3:30pm,TTH,M303,BSCS,First,Third
+CC14,Web Application Development (Lec),2:10pm-3:30pm,TTH,S312,BSIT(WebTech),Second,Second
+CC14,Web Application Development (Lec),2:10pm-3:30pm,MWF,S312,BSIT(Netsec),Second,Second
+CC15,Systems Integration and Architecture,2:10pm-3:30pm,TTHS,M304,BSDA,Second,Third
+CC17,Mobile Application Design and Development(Lab),2:10pm-3:30pm,MWF,M305,BSCS,Third,First
+CC19,Data Mining (Lab),2:10pm-3:30pm,TTHS,M305,BSCS,Second,Second
+CC5,Information Management(Lec),2:10pm-3:30pm,TTH,M301,BSIT(Netsec),Second,First
+CC6,Emerging Technologies in IT,2:10pm-3:30pm,TTHS,N3001,BSIT(WebTech),Third,First
+Hist100,Readings in Philippine History,7:30am-8:50am,TTHS,U402,BMMA,Second,First
+CC8,Introduction to Statistical Methods,2:10pm-3:30pm,SAT,M307,BSIT,First,Second
+CCS12,Graphics Design(Lab),2:10pm-3:30pm,MWF,M305,BSCS,Second,First
+CCS12,Graphics Design(Lec),2:10pm-3:30pm,TTH,M301,BSCS,Second,First
+CDA1,Programming for Data Analytics 1 (Lec),2:10pm-3:30pm,MW,M304,BSDA,First,Third
+CIT1,Quantitative Analysis,2:10pm-3:30pm,MWF,S312,BSIT(WebTech),Second,First
+CC18,Social and Professional Issues,3:30pm-4:50pm,TTHS,N3002,BSIT(ERP),Second,Second
+CIT16,IT Technopreneurship (Lec),2:10pm-3:30pm,MW,M304,BSDA,Second,Third
+CIT16,IT Technopreneurship (Lec),2:10pm-3:30pm,TTH,U705,BSIT(WebTech),Second,Third
+CIT22,Mastery in Network Administration (Lec),2:10pm-3:30pm,TTH,S122,BSIT(Netsec),Third,First
+CIT3,IT Project Management,2:10pm-3:30pm,MWF,U705,BSIT(WebTech),Second,Second
+CC14,Web Application Development (Lec),4:50pm-6:10pm,MW,M301,BSIT(ERP),Second,Second
+CIT6,Capstone Project 1,2:10pm-3:30pm,MWF,M306,BSIT(WebTech),Third,First
+CCS1,Physics,2:10pm-3:30pm,TTHS,M301,BSCS,First,Second
+FL100,Foreign Culture and Language,2:10pm-3:30pm,MWF,U703,BSDA,Second,Second
+MMC7,Digital Sound Production(lec),10:10am-11:30am,MW,M305,BMMA,Third,First
+MMC7,Digital Sound Production(lab),2:10pm-3:30pm,MWF,M305,BMMA,Third,First
+MMC8,Interactive Media Design(lab),3:30pm-4:50pm,MWF,M303,BMMA,Third,First
+MMC8,Interactive Media Design(lec),6:10pm-7:30pm,MW,M305,BMMA,Third,First
+NSTP2,National Service Training Program 2,2:10pm-3:30pm,TTHS,Aud,BSDA,First,Third
+PathFit1,Movement Contemporary Training,2:10pm-3:30pm,TTH,Gym,BSDA,First,First
+PathFit4,Outdoor and Adventure Activities,2:10pm-3:30pm,MW,Gym,BSDA,Second,First
+CIT3,IT Project Management,7:30am-8:50am,TTHS,U402,BSIT(ERP),Second,Second
+CORDI101,Cordillera: History and Socio-Cultural Heritage,8:50am-10:10am,MWF,S231,BSIT(ERP),Second,Second
+SocSci101N,Ethics,2:10pm-3:30pm,MWF,U402,BSIT(Netsec),Second,First
 SocSci103N,The Contemporary World,2:10pm-3:30pm,TTHS,S106,BSDA,Third,First
-SocSci103N,The Contemporary World,4:50pm-6:10pm,TTHS,S122,BSIT(Netsec),Third,First
-SocSci103N,The Contemporary World,6:10pm-7:30pm,MWF,S106,BSIT(ERP),Third,First
-Techno100,Technopreneurship,7:30am-8:50am,TTHS,U706,BSCS,First,Second
 Techno100,Technopreneurship,2:10pm-3:30pm,MWF,U706,BSIT,First,Second
-Techno100,Technopreneurship,8:50am-10:10am,TTHS,U706,BSDA,First,Second
+CC12,Statistical Design and Analysis (Lab),3:30pm-4:50pm,TTHS,M306,BSIT,First,Third
+CC16,IT Security,10:10am-11:30am,TTHS,M301,BSIT(ERP),Second,Third
+CC14,Web Application Development (Lab),3:30pm-4:50pm,TTHS,M305,BSIT(WebTech),Second,Second
+CC17,Mobile Application Design and Development(Lec),3:30pm-4:50pm,MW,S312,BSCS,Third,First
+CC18,Social and Professional Issues,3:30pm-4:50pm,TTHS,N3002,BSDA,Second,Second
+SocSci100,Art Appreciation,10:10am-11:30am,MWF,U706,BSIT(ERP),Second,Third
+CC18,Social and Professional Issues,3:30pm-4:50pm,MWF,U705,BSIT(WebTech),Second,Second
+CC19,Data Mining (Lec),3:30pm-4:50pm,TTH,M307,BSCS,Second,Second
+CC5,Information Management(Lab),3:30pm-4:50pm,TTHS,M307,BSIT(Netsec),Second,First
+CC5,Information Management(Lec),3:30pm-4:50pm,TTH,M304,BSDA,Second,First
+CC8,Introduction to Statistical Methods,3:30pm-4:50pm,MWF,U706,BSDA,First,Second
+CCS14,Digital Animation (Lab),3:30pm-4:50pm,TTHS,M305,BSCS,Second,Third
+MMC9,Multimedia Publishing(lec),10:10am-11:30am,TTH,M306,BMMA,Third,First
+CCS8,Software Engineering (Lab),3:30pm-4:50pm,MWF,M305,BSCS,Second,Second
+CDA1,Programming for Data Analytics 1 (Lab),3:30pm-4:50pm,MWF,M307,BSDA,First,Third
+CDA2,Relational and NoSQL Databases,3:30pm-4:50pm,MWF,F506,BSDA,Second,First
+CDA9,Machine LEarning Fundamentals(Lab),3:30pm-4:50pm,MWF,M305,BSDA,Third,First
+CC15,Systems Integration and Architecture,11:30am-12:50pm,MWF,M304,BSIT(ERP),Second,Third
+CIT14,WEB TECHNOLOGIES (Lec),3:30pm-4:50pm,TTH,M304,BSIT(WebTech),Second,First
+CIT16,IT Technopreneurship (Lab),3:30pm-4:50pm,MWF,M306,BSDA,Second,Third
+CIT16,IT Technopreneurship (Lab),3:30pm-4:50pm,TTHS,M303,BSIT(WebTech),Second,Third
+CIT21,Connecting Networks (Lab),3:30pm-4:50pm,MWF,S312,BSIT(Netsec),Second,Third
+FL100,Foreign Culture and Language,11:30am-12:50pm,TTHS,U402,BSIT(ERP),Second,Third
+CORDI101,Cordillera: History and Socio-Cultural Heritage,3:30pm-4:50pm,TTHS,S231,BSIT(Netsec),Second,Second
+MMC9,Multimedia Publishing(lab),11:30am-12:50pm,TTHS,M306,BMMA,Third,First
+Engl100,Purposive Communication,11:30-12:50,MWF,Aud,BSCS,First,First
+Hist100,Readings in Philippine History,3:30pm-4:50pm,MWF,U402,BSDA,First,First
+Hist101,The Life and Works of Rizal,3:30pm-4:50pm,MWF,U402,BSCS,Third,Third
+MMC11,Multimedia Capstone  Project 1,4:50pm-6:10pm,TTHS,M304,BMMA,Third,First
+MMC10,BusinessVentures in Multimedia,6:10pm-7:30pm,TTHS,M301,BMMA,Third,First
+MCC5,Fundamentals of Design (Lec),10:10am-11:30am,MW,S312,BMMA,First,Second
+NSTP1,National Service Training Program 1,3:30pm-4:50pm,TTHS,Aud,BSIT,First,First
+NSTP1,National Service Training Program 1,3:30pm-4:50pm,TTHS,Aud,BSCS,First,First
+NSTP2,National Service Training Program 2,3:30pm-4:50pm,MWF,Aud,BSCS,First,Third
+NSTP2,National Service Training Program 2,3:30pm-4:50pm,MWF,Aud,BSIT,First,Third
+MCC5,Fundamentals of Design (Lab),11:30am-12:50pm,MWF,M305,BMMA,First,Second
+PathFit1,Movement Contemporary Training,3:30pm-4:50pm,MW,Gym,BSIT,First,First
+PathFit2,Exsercised-based Fitness Activties,3:30pm-4:50pm,TTH,Gym,BSCS,First,Second
+PathFit4,Outdoor and Adventure Activities,3:30pm-4:50pm,MW,Gym,BSIT(Netsec),Second,First
+Psych100,Understanding the Self,3:30pm-4:50pm,MWF,U703,BSCS,First,Second
+MCC6,Writing for New Media,11:30am-12:50pm,TTHS,U402,BMMA,First,Second
+CC12,Statistical Design and Analysis (Lec),4:50pm-6:10pm,TTH,M305,BSIT,First,Third
+CIT11,ABAP Programming 1 (Lec),2:10pm-3:30pm,MW,M304,BSIT(ERP),Second,Third
+CC16,IT Security,4:50pm-6:10pm,TTHS,M304,BSIT(WebTech),Second,Third
+CIT4,Introduction to Integrative Programming and Technologies (Lec),2:10pm-3:30pm,TTH,U402,BSIT(ERP),Second,Third
+CC18,Social and Professional Issues,4:50pm-6:10pm,MWF,M301,BSIT(Netsec),Second,Second
+CC18,Social and Professional Issues ,4:50pm-6:10pm,TTHS,M301,BSCS,Third,First
+CC3,Object Oriented Programming (Lab),4:50pm-6:10pm,MWF,M304,BSIT,First,Second
+CIT11,ABAP Programming 1 (Lab),3:30pm-4:50pm,MWF,M307,BSIT(ERP),Second,Third
+CC5,Information Management(Lab),4:50pm-6:10pm,TTHS,M307,BSDA,Second,First
+CC6,Emerging Technologies in IT,4:50pm-6:10pm,MWF,M307,BSIT(Netsec),Third,First
+CC6,Emerging Technologies in IT,4:50pm-6:10pm,MWF,M307,BSDA,Third,Second
+CCS14,Digital Animation (Lec),4:50pm-6:10pm,TTH,M305,BSCS,Second,Third
+CCS16,Game Console Integration (Lab),4:50pm-6:10pm,MWF,M306,BSCS,Third,Second
+CCS5,Computer Architecture and Organization,4:50pm-6:10pm,MWF,M304,BSCS,Second,First
+CCS8,Software Engineering (Lec),4:50pm-6:10pm,MW,S312,BSCS,Second,Second
+CDA12,Data Analytics Internship,4:50pm-6:10pm,MWF,M301,BSDA,Third,Third
+CDA9,Machine LEarning Fundamentals(Lec),4:50pm-6:10pm,MW,S106,BSDA,Third,First
+CIT14,WEB TECHNOLOGIES (Lab),4:50pm-6:10pm,TTHS,M303,BSIT(WebTech),Second,First
+CIT21,Connecting Networks (Lec),4:50pm-6:10pm,MW,S312,BSIT(Netsec),Second,Third
+CIT25,"Enterprise Networking, Security, and Automation (Lab)",4:50pm-6:10pm,TTH,M305,BSIT(Netsec),Second,Second
+CIT4,Introduction to Integrative Programming andd Technologies (Lab),3:30pm-4:50pm,TTHS,M306,BSIT(ERP),Second,Third
+CIT7,Capstone Project 2,4:50pm-6:10pm,MWF,M303,BSIT(WebTech),Third,Second
+CIT8,IT Internship,4:50pm-6:10pm,MWF,M301,BSIT,Third,Third
+CC2,Introduction to Computer Programming (Lab),12:50pm-2:10pm,TTHS,M303,BMMA,First,Second
+CC2,Introduction to Computer Programming (Lec),2:10pm-3:30pm,TTH,U402,BMMA,First,Second
+NSTP1,National Service Training Program 1,4:50pm-6:10pm,TTHS,Aud,BSDA,First,First
+PathFit2,Exercise-based Fitness Activities,4:50pm-6:10pm,TTH,Gym,BSDA,First,Second
+MCC4,Advanced Drawing and Construction Techniques (Lec),2:10pm-3:30pm,MW,M301,BMMA,First,Second
+MCC4,Advanced Drawing and Construction Techniques (Lab),3:30pm-4:50pm,MWF,M301,BMMA,First,Second
+SocSci103N,The Contemporary World,4:50pm-6:10pm,TTHS,S122,BSIT(Netsec),Third,First
+CC16,IT Security,6:10pm-7:30pm,TTHS,M301,BSCS,Third,First
+CIT12,ABAP Programming 2 (Lab),11:30am-12:50pm,TTHS,M307,BSIT(ERP),Third,First
+CC3,Object Oriented Programming (Lec),6:10pm-7:30pm,MW,M307,BSIT,First,Second
+CC6 ,Emerging Technologies in IT,12:50pm-2:10pm,MWF,M307,BSIT(ERP),Third,First
+CCS19,Thesis Writing 2,6:10pm-7:30pm,TTHS,M303,BSCS,Third,Second
+CCS11,CS Internship,6:10pm-7:30pm,MWF,M307,BSCS,Third,Third
+CCS16,Game Console Integration (Lec),6:10pm-7:30pm,MW,M306,BSCS,Third,Second
+CCS9,Thesis Writing 1,6:10pm-7:30pm,MWF,M303,BSCS,Third,First
+CDA10,Data Analytics Capstone Project 1,6:10pm-7:30pm,MWF,M305,BSDA,Third,First
+CDA11,Data Analytics Capstone Project 2,6:10pm-7:30pm,TTHS,M304,BSDA,Third,Second
+CDA12,Data Analytics Internship,6:10pm-7:30pm,TTHS,M301,BSDA,Third,Third
+CIT25,"Enterprise Networking, Security, and Automation (Lec)",6:10pm-7:30pm,TTH,M301,BSIT(Netsec),Second,Second
+CIT6,Capstone Project 1,6:10pm-7:30pm,MWF,M303,BSIT(Netsec),Third,First
+CIT8,IT Internship,6:10pm-7:30pm,TTHS,M301,BSIT,Third,Third
+Hist101,Mastery in Web Technology (Lec),6:10pm-7:30pm,TTH,M307,BSIT(WebTech),Third,Second
+Science100,"Science, Technology and Society",6:10pm-7:30pm,TTHS,S231,BSIT(WebTech),Second,Second
+CIT12,ABAP Programming 2 (Lec),12:50pm-2:10pm,TTH,M304,BSIT(ERP),Third,First
+PathFit2,Exercise-based Fitness Activities,4:50pm-6:10pm,MW,Gym,BMMA,First,Second
+CC1,Computing Fundamentals(Lec),7:30am-8:50am,MW,M304,BSIT,First,First
+CC10,Introduction to Networks (Lab),7:30am-8:50am,MWF,M303,BSDA,Third,Second
+CC11,Communication in the Workplace,7:30am-8:50am,TTHS,U706,BSIT,First,Third
+CC12,Statistical Design and Analysis (Lec),7:30am-8:50am,MW,M304,BSCS,First,Third
+CC12,Statistical Design and Analysis (Lec),7:30am-8:50am,MW,M304,BSDA,First,Third
+CC17,Mobile Application Design and Development(Lab),7:30am-8:50am,MWF,M307,BSIT(WebTech),Third,First
+CC17,Mobile Application Design and Development(Lec),7:30am-8:50am,MW,N3001,BSIT(Netsec),Third,First
+CC2,Introduction to Computer Programming(Lab),7:30am-8:50am,TTHS,M303,BSIT,First,First
+CC2,Introduction to Computer Programming(Lec),7:30am-8:50am,MW,U402,BSDA,First,First
+Psych100,Understanding the Self,7:30am-8:50am,TTHS,N5003,BMMA,First,Second
+CC21,Introduction to ERP (Lec),7:30am-8:50am,TTH,S312,BSIT,First,Second
+CC4,Data Structures and Algorithms(Lec),7:30am-8:50am,MW,M307,BSCS,First,Second
+CC5,Information Management(Lec),7:30am-8:50am,MW,S312,BSIT(WebTech),Second,First
+CC5 ,Information Management(Lec),7:30am-8:50am,TTH,M301,BSCS,Second,First
+CC9,Discrete Structures,7:30am-8:50am,MWF,S122,BSDA,Second,First
+MCC3,History of Visual Design,8:50am-10:10am,MWF,U402,BMMA,First,Second
+CCS7,Intelligent Systems (Lec),7:30am-8:50am,MW,M307,BSCS,Second,Third
+CDA6,Data Preparation Technologies(Lec),7:30am-8:50am,MW,S312,BSDA,Second,Third
+CDA8,Data Modeling Techniques (Lab),7:30am-8:50am,TTHS,M306,BSDA,Second,Third
+CIT1,Quantitative Analysis,7:30am-8:50am,MWF,U705,BSDA,Second,Second
+CIT18,Mastery in Web Technology (Lab),7:30am-8:50am,TTHS,M305,BSIT(WebTech),Third,Second
+CIT19,Mastery in Networks(Lab),7:30am-8:50am,TTHS,M303,BSIT(Netsec),Second,First
+CIT23,Firewalls and Network Security (Lec),7:30am-8:50am,TTH,M303,BSIT(Netsec),Third,Second
+CC17,Mobile Application Design and Development(Lec),4:50pm-6:10pm,TTHS,S312,BSIT(ERP),Third,First
+CIT3,IT Project Management,7:30am-8:50am,TTHS,U402,BSDA,Second,Second
+CIT6,Capstone Project 1,4:50pm-6:10pm,MWF,M303,BSIT(ERP),Third,First
+CIT4,Introduction to Integrative Programming andd Technologies (Lab),7:30am-8:50am,TTHS,S312,BSIT(Netsec),Second,Third
+CIT7,Capstone Project 2,7:30am-8:50am,MWF,M306,BSIT(Netsec),Third,Second
+CORDI101,Cordillera: History and Socio-Cultural Heritage,7:30am-8:50am,TTHS,U402,BSIT(WebTech),Second,Second
+Hist100,Readings in Philippine History,7:30am-8:50am,MWF,U706,BSCS,First,First
 Techno100,Technopreneurship,8:50am-10:10am,TTHS,U402,BMMA,First,Second
+MMC18,Game Design (Lec),10:10am-11:30am,MWF,M304,BMMA,Second,Second
+MCC8,Research Methods,11:30am-12:50pm,TTHS,M304,BMMA,Second,Second
+MMC4,Typography and Layout (Lab),3:30pm-4:50pm,MWF,M304,BMMA,Second,Second
+MMC4,Typography and Layout (Lec),4:50pm-6:10pm,MWF,M306,BMMA,Second,Second
+PathFit1,Movement Contemporary Training,7:30am-8:50am,TTH,Gym,BSCS,First,First
+PathFit3,Martial Arts,7:30am-8:50am,TTH,Gym,BSCS,First,Third
+PathFit3,Martial Arts,7:30am-8:50am,MW,Gym,BSIT,First,Third
+MMC5,3D Animation Techniques (Lec),4:50pm-6:10pm,TTH,M306,BMMA,Second,Second
+Psych100,Understanding the Self,7:30am-8:50am,MWF,U706,BSDA,First,Second
+SocSci100,Art Appreciation,7:30am-8:50am,MWF,U706,BSIT(WebTech),Second,Third
+SocSci100,Art Appreciation,7:30am-8:50am,TTHS,S231,BSDA,First,Second
+Techno100,Technopreneurship,7:30am-8:50am,TTHS,U706,BSCS,First,Second
+CC1,Computing Fundamentals(Lab),8:50am-10:10am,MWF,M303,BSIT,First,First
+CC1,Computing Fundamentals(Lab),8:50am-10:10am,TTHS,M303,BSDA,First,First
+CC10,Introduction to Networks (Lec),8:50am-10:10am,MW,S311,BSDA,Third,Second
+CC11,Communication in the Workplace,8:50am-10:10am,MWF,U706,BSDA,First,Second
+CC12,Statistical Design and Analysis (Lab),8:50am-10:10am,MWF,M306,BSCS,First,Third
+CC12,Statistical Design and Analysis (Lab),8:50am-10:10am,MWF,M306,BSDA,First,Third
+CC13,Systems Analysis and Design,8:50am-10:10am,MWF,M301,BSIT,First,Third
+CC15,Systems Integration and Architecture,8:50am-10:10am,MWF,M301,BSIT(WebTech),Second,Third
+CC17,Mobile Application Design and Development(Lab),8:50am-10:10am,MWF,N3001,BSIT(Netsec),Third,First
+CC17,Mobile Application Design and Development(Lec),8:50am-10:10am,MWF,S122,BSIT(WebTech),Third,First
+CC19,Data Mining (Lab),8:50am-10:10am,MWF,M305,BSIT(Netsec),Second,Second
+CC2,Introduction to Computer Programming(Lab),8:50am-10:10am,MWF,M307,BSDA,First,First
+CC2,Introduction to Computer Programming(Lec),8:50am-10:10am,TTH,M305,BSIT,First,First
+MMC5,3D Animation Techniques (Lab),6:10pm-7:30pm,TTHS,M304,BMMA,Second,Second
+CC21,Introduction to ERP (Lab),8:50am-10:10am,TTH,S312,BSIT,First,Second
+CC4,Data Structures and Algorithms(Lab),8:50am-10:10am,MWF,M304,BSCS,First,Second
+CC5,Information Management(Lab),8:50am-10:10am,MWF,S312,BSIT(WebTech),Second,First
+CC5 ,Information Management(Lab),8:50am-10:10am,TTHS,M305,BSCS,Second,First
+CC6,Emerging Technologies in IT,8:50am-10:10am,MWF,N5003,BSCS,Third,Second
+CC7,Human Computer Interaction,8:50am-10:10am,MWF,M304,BSCS,First,First
+CC9,Discrete Structures,8:50am-10:10am,TTHS,U706,BSIT,First,Third
+CCS7,Intelligent Systems (Lab),8:50am-10:10am,MWF,M307,BSCS,Second,Third
+CDA6,Data Preparation Technologies (Lab),8:50am-10:10am,MWF,S312,BSDA,Second,Third
+CDA8,Data Modeling Techniques (Lec),8:50am-10:10am,TTH,M306,BSDA,Second,Third
+CIT15,Multimedia Systems (Lab),8:50am-10:10am,MWF,M303,BSIT(WebTech),Second,Second
+CIT19,Mastery in Networks(Lec),8:50am-10:10am,TTH,S312,BSIT(Netsec),Second,First
+CIT23,Firewalls and Network Security (Lab),8:50am-10:10am,TTHS,M303,BSIT(Netsec),Third,Second
+CIT24,"Switching, Routing, and Wireless Essentials (Lec)",8:50am-10:10am,MW,M307,BSIT(Netsec),Second,First
+CC17,Mobile Application Design and Development(Lab),6:10pm-7:30pm,TTH,S312,BSIT(ERP),Third,First
+CIT4,Introduction to Integrative Programming andd Technologies (Lec),8:50am-10:10am,TTH,S312,BSIT(Netsec),Second,Third
+CORDI101,Cordillera: History and Socio-Cultural Heritage,8:50am-10:10am,MWF,S231,BSDA,Second,Second
+SocSci103N,The Contemporary World,6:10pm-7:30pm,MWF,S106,BSIT(ERP),Third,First
+CORDI101,Cordillera: History and Socio-Cultural Heritage,8:50am-10:10am,MWF,U806,BSCS,Second,Second
+Hist101,The Life and Works of Rizal,8:50am-10:10am,TTHS,U705,BSDA,First,Third
+Hist101,The Life and Works of Rizal,8:50am-10:10am,TTHS,S231,BSIT(WebTech),Third,Second
+CORDI101,Cordillera: History and Socio-Cultural Heritage,7:30am-8:50am,TTHS,F502,BMMA,Second,Second
+Math100,Mathematics in the Modern World,8:50am-10:10am,TTHS,U706,BSCS,First,First
+MMC18,Game Design (Lab),7:30am-8:50am,MWF,M304,BMMA,Second,Second
+Hist101,The Life and Works of Rizal,8:50am-10:10am,TTHS,U806,BMMA,Second,Second
+MM12,Post-Production Techniques(lec),7:30am-8:50am,MW,M301,BMMA,Third,Second
+Psych100,Understanding the Self,8:50am-10:10am,MWF,U806,BSIT,First,Second
+Soc Sci101N,Ethics,8:50am-10:10am,MWF,U705,BSCS,Second,First
+SocSci100,Art Appreciation,8:50am-10:10am,TTHS,U706,BSCS,First,Third
+SocSci100,Art Appreciation,8:50am-10:10am,MWF,U706,BSIT(Netsec),Second,Third
+Techno100,Technopreneurship,8:50am-10:10am,TTHS,U706,BSDA,First,Second
+MM12,Post-Production Techniques(lab),8:50am-10:10am,MWF,M307,BMMA,Third,Second
+MMC13,Multimedia Seminars(lec),8:50am-10:10am,TTH,M306,BMMA,Third,Second
+MMC13,Multimedia Seminars(lab),10:10am-11:30am,TTHS,M306,BMMA,Third,Second
+MMC14,Multimedia Capstone Project 2,11:30am-12:50pm,TTHS,M304,BMMA,Third,Second
+PathFit3,Martial Arts,10:10am-11:30am,TTH,Gym,BMMA,First,Third
+Science100,"Science, Technology and Society",11:30am-12:50pm,MWF,U402,BMMA,First,Third
+MMC1,Digital Photography (Lab),12:50pm-2:10pm,TTHS,M305,BMMA,First,Third
+SocSci100,Art Appreciation,12:50pm-2:10pm,MWF,U705,BMMA,First,Third
+MMC1,Digital Photography (Lec),2:10pm-3:30pm,TTH,M305,BMMA,First,Third
+MCC7,Color Theory,3:30pm-4:50pm,MWF,M301,BMMA,First,Third
+CCS14,Digital Animation (Lec),7:30am-8:50am,MW,M305,BMMA,First,Third
+NSTP2,National Service Training Program 2,7:30am-8:50am,TTHS,Aud,BMMA,First,Third
+CCS14,Digital Animation (Lab),8:50am-10:10am,MWF,M305,BMMA,First,Third
+MMC19,Advanced 3D Modeling and Scene Design(lec),11:30am-12:50pm,MW,M301,BMMA,Second,Third
+MMC19,Advanced 3D Modeling and Scene Design(lab),12:50pm-2:10pm,MWF,M305,BMMA,Second,Third
+CC14,Web Application Development(lec),3:30pm-4:50pm,MW,M307,BMMA,Second,Third
+CC14,Web Application Development(lab),4:50pm-6:10pm,MWF,M307,BMMA,Second,Third
+MMC6,Fundamentals in Film and Video Production(lec),7:30am-8:50am,TTH,M305,BMMA,Second,Third
+MMC6,Fundamentals in Film and Video Production(lab),8:50am-10:10am,TTHS,M305,BMMA,Second,Third
+FL100,Foreign Culture and Language,2:10pm-3:30pm,TTHS,U705,BMMA,Second,Third
+SocSci103N,The Contemporary World,4:50pm-6:10pm,TTHS,U211,BMMA,Second,Third
+MMC15,Portfolio Preparation and Exhibit Design(lec),3:30pm-4:50pm,MW,M305,BMMA,Third,Third
+MMC15,Portfolio Preparation and Exhibit Design(lab),4:50pm-6:10pm,MWF,M305,BMMA,Third,Third
+Hist101,The Life and Works of Rizal,10:10am-11:30am,MWF,U402,BSIT(ERP),Third,Second
+CIT13,Mastery in ERP (Lec),12:50pm-2:10pm,MW,S312,BSIT(ERP),Third,Second
+CIT13,Mastery in ERP (Lab),2:10pm-3:30pm,MWF,S312,BSIT(ERP),Third,Second
+CIT7,Capstone Project 2,3:30pm-4:50pm,MWF,M303,BSIT(ERP),Third,Second
+MMC16,Multimedia Internship,6:10pm-7:30pm,MWF,M306,BMMA,Third,Third
