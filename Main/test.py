@@ -59,12 +59,6 @@ class TimeSlot:
     def __lt__(self, other):
         return self.start_time < other.start_time
 
-def get_available_rooms(course: Course, all_rooms: Set[str]) -> List[str]:
-    restricted_rooms = {'Gym', 'Aud'}
-    if course.is_restricted_room_course():
-        return list(restricted_rooms)
-    return list(all_rooms - restricted_rooms)
-
 def get_consecutive_time_slots(time_slots: List[TimeSlot], is_mwf: bool, num_slots: int) -> List[TimeSlot]:
     available_sequences = []
     for i in range(len(time_slots) - num_slots + 1):
@@ -73,13 +67,53 @@ def get_consecutive_time_slots(time_slots: List[TimeSlot], is_mwf: bool, num_slo
             available_sequences.append(sequence)
     return available_sequences
 
-def balance_and_shuffle_courses(courses: List[Course]) -> List[Course]:
+def get_available_rooms(course: Course, all_rooms: Set[str], year_level: str, trimester: str) -> List[str]:
+    # If it's an NSTP course, return only Auditorium
+    if 'NSTP' in course.code:
+        return ['Aud']
+        
+    # If it's a PathFit course, return only Gym
+    if 'PathFit' in course.code or 'PATHFit' in course.code:
+        return ['Gym']
+
+    lab_rooms = {'M303', 'M304', 'M305', 'M306', 'M307', 'N3001', 'N3002', 'S312'}
+    major_rooms = {'M301', 'M303', 'M304', 'M305', 'M306', 'M307', 'N3001', 'N3002', 'S312'}
+    major_subjects = {
+        'CC1', 'CC10', 'CC11', 'CC14', 'CC16', 'CC17', 'CC18', 'CC19', 'CC2', 
+        'CC21', 'CC23', 'CC24', 'CC3', 'CC4', 'CC5', 'CC6', 'CC7', 'CC8', 'CC9',
+        'CCS10', 'CCS12', 'CCS13', 'CCS15', 'CCS16', 'CCS2', 'CCS3', 'CCS5', 
+        'CCS6', 'CCS8', 'CCS9', 'CDA10', 'CDA11', 'CDA2', 'CDA3', 'CDA4', 'CDA5',
+        'CDA9', 'CIT1', 'CIT10', 'CIT12', 'CIT14', 'CIT15', 'CIT17', 'CIT18',
+        'CIT19', 'CIT22', 'CIT23', 'CIT24', 'CIT25', 'CIT3', 'CIT5', 'CIT6',
+        'CIT7', 'CIT9', 'CSS1', 'FL100', 'MCC1', 'MCC2', 'MCC3', 'MCC4', 'MCC5',
+        'MCC6', 'MCC8', 'MMC17', 'MMC18', 'MMC2', 'MMC3', 'MMC4', 'MMC5'
+    }
+    
+    # Check if the course code matches any major subject code
+    is_major = any(course.code.startswith(major_code) for major_code in major_subjects)
+    
+    # If it's a lab course, only return lab rooms
+    if course.is_lab:
+        return list(lab_rooms)
+    
+    # If it's a major subject but not a lab
+    if is_major:
+        return list(major_rooms)
+        
+    # For regular courses, return all rooms except restricted (Gym, Aud), lab, and major rooms
+    restricted_rooms = {'Gym', 'Aud'}
+    return list(all_rooms - restricted_rooms - lab_rooms - major_rooms)
+
+def balance_and_shuffle_courses(courses: List[Course], year_level: str, trimester: str) -> List[Course]:
     # Initialize time slots
     base_times = [
         '7:30am', '8:50am', '10:10am', '11:30am',
         '12:50pm', '2:10pm', '3:30pm', '4:50pm', '6:10pm'
     ]
     time_slots = [TimeSlot(time) for time in base_times]
+    
+    # Track room assignments per course code
+    course_room_history = {}
     
     # Group courses
     paired_courses = {}
@@ -100,14 +134,51 @@ def balance_and_shuffle_courses(courses: List[Course]) -> List[Course]:
     mwf_courses = []
     tth_courses = []
     
+    def select_room(course: Course, available_rooms: List[str]) -> str:
+        # For NSTP and PathFit courses, maintain strict room assignment
+        if 'NSTP' in course.code:
+            return 'Aud'
+        if 'PathFit' in course.code or 'PATHFit' in course.code:
+            return 'Gym'
+            
+        # Get the base course code (without section identifiers)
+        base_code = course.code.split('(')[0].strip()
+        
+        # If this course code has been assigned rooms before
+        if base_code in course_room_history:
+            previously_used_rooms = [room for room in available_rooms if room in course_room_history[base_code]]
+            if previously_used_rooms:
+                # 70% chance to reuse a previously used room if available
+                if random.random() < 0.6:
+                    return random.choice(previously_used_rooms)
+        
+        # Either no room history or didn't select from history
+        selected_room = random.choice(available_rooms)
+        
+        # Update room history
+        if base_code not in course_room_history:
+            course_room_history[base_code] = set()
+        course_room_history[base_code].add(selected_room)
+        
+        return selected_room
+    
     # Process paired courses
     pair_keys = list(paired_courses.keys())
     random.shuffle(pair_keys)
     
     for pair_key in pair_keys:
         pair = paired_courses[pair_key]
-        available_rooms = get_available_rooms(pair[0], all_rooms)
-        if not available_rooms:
+        
+        # Get available rooms for each course in the pair
+        rooms_per_course = []
+        for course in pair:
+            available_rooms = get_available_rooms(course, all_rooms, year_level, trimester)
+            if not available_rooms:
+                continue
+            rooms_per_course.append(available_rooms)
+        
+        # Skip if we don't have rooms for all courses in the pair
+        if len(rooms_per_course) != len(pair):
             continue
         
         # Choose pattern first
@@ -127,11 +198,10 @@ def balance_and_shuffle_courses(courses: List[Course]) -> List[Course]:
             slot.mark_used(is_mwf)
         
         # Assign rooms and times
-        room_assignments = random.sample(available_rooms, len(pair))
-        for i, (course, slot) in enumerate(zip(pair, selected_sequence)):
+        for i, (course, slot, available_rooms) in enumerate(zip(pair, selected_sequence, rooms_per_course)):
             course.time = f"{slot.start_time_str}-{slot.end_time_str}"
             course.days = pattern
-            course.room = room_assignments[i]
+            course.room = select_room(course, available_rooms)
             course.time_obj = slot.start_time
             course.end_time_obj = slot.end_time
         
@@ -143,7 +213,7 @@ def balance_and_shuffle_courses(courses: List[Course]) -> List[Course]:
     # Process standalone courses
     random.shuffle(standalone_courses)
     for course in standalone_courses:
-        available_rooms = get_available_rooms(course, all_rooms)
+        available_rooms = get_available_rooms(course, all_rooms, year_level, trimester)
         if not available_rooms:
             continue
         
@@ -160,7 +230,7 @@ def balance_and_shuffle_courses(courses: List[Course]) -> List[Course]:
         
         course.time = f"{selected_slot.start_time_str}-{selected_slot.end_time_str}"
         course.days = pattern
-        course.room = random.choice(available_rooms)
+        course.room = select_room(course, available_rooms)
         course.time_obj = selected_slot.start_time
         course.end_time_obj = selected_slot.end_time
         
@@ -179,18 +249,26 @@ class SectionCreatorApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Subject Offering")
-        self.root.geometry("460x700")
+        self.root.geometry("460x800")
         self.root.configure(bg="#f0f0f0")
         self.df = None
-        self.programs = ["BSIT", "BSIT(WebTech)", "BSIT(Netsec)", "BSIT(ERP)", "BSCS", "BSDA", "BMMA"]
+        # Define programs and their available years
+        self.program_years = {
+            "BSIT": ["First"],
+            "BSIT(WebTech)": ["Second", "Third"],
+            "BSIT(Netsec)": ["Second", "Third"],
+            "BSIT(ERP)": ["Second", "Third"],
+            "BSCS": ["First", "Second", "Third"],
+            "BSDA": ["First", "Second", "Third"],
+            "BMMA": ["First", "Second", "Third"]
+        }
         self.setup_ui()
-        
+
     def setup_ui(self):
-        # Create main container
+        # Main container
         main_container = ttk.Frame(self.root, padding="20")
         main_container.grid(row=0, column=0, sticky="nsew")
         
-        # Configure grid weights
         self.root.grid_rowconfigure(0, weight=1)
         self.root.grid_columnconfigure(0, weight=1)
         
@@ -200,55 +278,31 @@ class SectionCreatorApp:
         style.configure("Header.TLabel", font=("Helvetica", 12, "bold"))
         style.configure("Custom.TLabelframe", padding=15)
         style.configure("Action.TButton", padding=10)
+        style.configure("Subheader.TLabel", font=("Helvetica", 10, "bold"))
         
         # Title
         title_frame = ttk.Frame(main_container)
         title_frame.grid(row=0, column=0, pady=(0, 20), sticky="ew")
-        ttk.Label(
-            title_frame, 
-            text="Subject COurce Offering", 
-            style="Title.TLabel"
-        ).pack()
+        ttk.Label(title_frame, text="Subject Course Offering", style="Title.TLabel").pack()
         
         # File import frame
-        import_frame = ttk.LabelFrame(
-            main_container, 
-            text="Data Import", 
-            style="Custom.TLabelframe"
-        )
+        import_frame = ttk.LabelFrame(main_container, text="Data Import", style="Custom.TLabelframe")
         import_frame.grid(row=1, column=0, pady=(0, 20), sticky="ew")
         
-        self.file_label = ttk.Label(
-            import_frame, 
-            text="No file selected", 
-            font=("Helvetica", 10, "italic")
-        )
+        self.file_label = ttk.Label(import_frame, text="No file selected", font=("Helvetica", 10, "italic"))
         self.file_label.grid(row=0, column=1, padx=10)
         
-        ttk.Button(
-            import_frame, 
-            text="Import CSV File", 
-            command=self.import_csv,
-            style="Action.TButton"
-        ).grid(row=0, column=0, padx=10)
+        ttk.Button(import_frame, text="Import CSV File", command=self.import_csv, style="Action.TButton").grid(row=0, column=0, padx=10)
         
         # Configuration frame
-        config_frame = ttk.LabelFrame(
-            main_container, 
-            text="Section Configuration", 
-            style="Custom.TLabelframe"
-        )
+        config_frame = ttk.LabelFrame(main_container, text="Section Configuration", style="Custom.TLabelframe")
         config_frame.grid(row=2, column=0, pady=(0, 20), sticky="ew")
         
         # Trimester selection
         trim_frame = ttk.Frame(config_frame)
-        trim_frame.grid(row=0, column=0, pady=(0, 15), sticky="ew")
+        trim_frame.grid(row=0, column=0, columnspan=2, pady=(0, 15), sticky="ew")
         
-        ttk.Label(
-            trim_frame, 
-            text="Trimester:", 
-            style="Header.TLabel"
-        ).grid(row=0, column=0, padx=(0, 10))
+        ttk.Label(trim_frame, text="Trimester:", style="Header.TLabel").grid(row=0, column=0, padx=(0, 10))
         
         self.trimester_var = tk.StringVar(value="First")
         trimester_combo = ttk.Combobox(
@@ -262,56 +316,87 @@ class SectionCreatorApp:
         
         # Program sections configuration
         sections_frame = ttk.Frame(config_frame)
-        sections_frame.grid(row=1, column=0, sticky="ew")
+        sections_frame.grid(row=1, column=0, sticky="ew", columnspan=2)
         
-        ttk.Label(
-            sections_frame, 
-            text="Number of Sections per Program",
-            style="Header.TLabel"
-        ).grid(row=0, column=0, columnspan=2, pady=(0, 10))
+        ttk.Label(sections_frame, text="Number of Sections per Program", style="Header.TLabel").grid(row=0, column=0, columnspan=2, pady=(0, 10))
         
-        # Create two columns for program section counts
+        # Dictionary to store all section count widgets
         self.section_counts = {}
-        mid_point = len(self.programs) // 2 + len(self.programs) % 2
         
-        for i, program in enumerate(self.programs):
-            col = 0 if i < mid_point else 1
-            row = i % mid_point + 1
+        # Split programs into two columns
+        left_programs = ["BSIT", "BSIT(WebTech)", "BSIT(Netsec)", "BSIT(ERP)"]
+        right_programs = ["BSCS", "BSDA", "BMMA"]
+        
+        # Create left column
+        left_frame = ttk.Frame(sections_frame)
+        left_frame.grid(row=1, column=0, padx=20, sticky="n")
+        
+        current_row = 0
+        for program in left_programs:
+            # Program header
+            ttk.Label(left_frame, text=program, style="Subheader.TLabel").grid(row=current_row, column=0, sticky="w")
+            current_row += 1
             
-            container = ttk.Frame(sections_frame)
-            container.grid(row=row, column=col, pady=5, padx=20, sticky="w")
+            self.section_counts[program] = {}
             
-            label = ttk.Label(
-                container, 
-                text=f"{program}:",
-                width=15,  # Fixed width for labels
-                anchor="e"  # Right-align the text
-            )
-            label.grid(row=0, column=0, padx=(0, 10))
+            # Add year-specific section counts
+            years = self.program_years[program]
+            for year in years:
+                container = ttk.Frame(left_frame)
+                container.grid(row=current_row, column=0, pady=2, padx=20, sticky="w")
+                
+                # Year label
+                ttk.Label(container, text=f"{year}:", width=8, anchor="e").grid(row=0, column=0, padx=(0, 10))
+                
+                # Section count spinbox
+                spinbox = ttk.Spinbox(container, from_=1, to=10, width=5, justify="center")
+                spinbox.grid(row=0, column=1)
+                spinbox.set(0)
+                self.section_counts[program][year] = spinbox
+                
+                current_row += 1
             
-            spinbox = ttk.Spinbox(
-                container, 
-                from_=1, 
-                to=10, 
-                width=5,
-                justify="center"
-            )
-            spinbox.grid(row=0, column=1, sticky="w")  # Left-align the spinbox
-            spinbox.set(1)
-            self.section_counts[program] = spinbox
+            # Add spacing between programs
+            current_row += 1
+        
+        # Create right column
+        right_frame = ttk.Frame(sections_frame)
+        right_frame.grid(row=1, column=1, padx=20, sticky="n")
+        
+        current_row = 0
+        for program in right_programs:
+            # Program header
+            ttk.Label(right_frame, text=program, style="Subheader.TLabel").grid(row=current_row, column=0, sticky="w")
+            current_row += 1
+            
+            self.section_counts[program] = {}
+            
+            # Add year-specific section counts
+            years = self.program_years[program]
+            for year in years:
+                container = ttk.Frame(right_frame)
+                container.grid(row=current_row, column=0, pady=2, padx=20, sticky="w")
+                
+                # Year label
+                ttk.Label(container, text=f"{year}:", width=8, anchor="e").grid(row=0, column=0, padx=(0, 10))
+                
+                # Section count spinbox
+                spinbox = ttk.Spinbox(container, from_=1, to=10, width=5, justify="center")
+                spinbox.grid(row=0, column=1)
+                spinbox.set(0)
+                self.section_counts[program][year] = spinbox
+                
+                current_row += 1
+            
+            # Add spacing between programs
+            current_row += 1
         
         # Generate button
         generate_frame = ttk.Frame(main_container)
         generate_frame.grid(row=3, column=0, pady=20)
         
-        ttk.Button(
-            generate_frame,
-            text="Generate and Export Sections",
-            command=self.generate_sections,
-            style="Action.TButton",
-            width=30
-        ).pack()
-        
+        ttk.Button(generate_frame, text="Generate and Export Sections", command=self.generate_sections, style="Action.TButton", width=30).pack()
+
     def import_csv(self):
         file_path = filedialog.askopenfilename(filetypes=[("CSV files", "*.csv")])
         if file_path:
@@ -319,7 +404,7 @@ class SectionCreatorApp:
             file_name = file_path.split("/")[-1]
             self.file_label.config(text=f"Selected file: {file_name}")
             messagebox.showinfo("Success", "CSV file imported successfully!")
-            
+
     def create_section_courses(self, program: str, year: str, trimester: str) -> List[Course]:
         # Filter courses for the specific program, year, and trimester
         filtered_df = self.df[
@@ -339,61 +424,57 @@ class SectionCreatorApp:
             )
             courses.append(course)
         
-        # Shuffle and balance courses
-        return balance_and_shuffle_courses(courses)
-    
+        # Pass year and trimester to balance_and_shuffle_courses
+        return balance_and_shuffle_courses(courses, year, trimester)
+
     def generate_sections(self):
         if self.df is None:
             messagebox.showerror("Error", "Please import CSV file first")
             return
-            
-        # Create workbook for export
+                
         wb = openpyxl.Workbook()
         
-        # Generate sections for each program
-        ws = wb.create_sheet("Sections")
-        row = 1
+        # Year level mapping dictionary
+        year_mapping = {
+            "First": "1",
+            "Second": "2",
+            "Third": "3"
+        }
         
-        for program in self.programs:
-            num_sections = int(self.section_counts[program].get())
-            for year in ['First', 'Second', 'Third']:
-                year_num = '1' if year == 'First' else '2' if year == 'Second' else '3'
-                
-                # Generate sections for each year
-                for section_num in range(num_sections):
-                    # Convert section number to letter (0=A, 1=B, etc.)
-                    section_letter = chr(65 + section_num)  # 65 is ASCII for 'A'
-                    # Create section name using year number and letter
-                    section_name = f"{year_num}{section_letter}"
-                    
-                    # Write section header
-                    ws.cell(row=row, column=1, value=f"{program}, {year} Year, {self.trimester_var.get()} Trimester Section {section_name}")
-                    row += 1
-                    
-                    # Write column headers
-                    headers = ["COURSE CODE", "DESCRIPTION", "TIME", "DAYS", "ROOM"]
-                    for col, header in enumerate(headers, 1):
-                        ws.cell(row=row, column=col, value=header)
-                    row += 1
-                    
-                    # Get courses for this section
-                    courses = self.create_section_courses(program, year, self.trimester_var.get())
-                    
-                    # Write courses
-                    for course in courses:
-                        ws.cell(row=row, column=1, value=course.code)
-                        ws.cell(row=row, column=2, value=course.description)
-                        ws.cell(row=row, column=3, value=course.time)
-                        ws.cell(row=row, column=4, value=course.days)
-                        ws.cell(row=row, column=5, value=course.room)
-                        row += 1
-                    
-                    row += 1  # Add space between sections
+        for group_name in ['A', 'B']:
+            ws = wb.create_sheet(f"Group {group_name}")
+            row = 1
+            
+            for program, year_sections in self.section_counts.items():
+                for year, spinbox in year_sections.items():
+                    num_sections = int(spinbox.get())
+                    if num_sections > 0:
+                        for section_num in range(num_sections):
+                            section_letter = chr(65 + section_num)
+                            section_name = f"{year_mapping[year]}{section_letter}"
+                            
+                            ws.cell(row=row, column=1, value=f"{program}, {year} Year, {self.trimester_var.get()} Trimester Section {section_name}")
+                            row += 1
+                            
+                            headers = ["COURSE CODE", "DESCRIPTION", "TIME", "DAYS", "ROOM"]
+                            for col, header in enumerate(headers, 1):
+                                ws.cell(row=row, column=col, value=header)
+                            row += 1
+                            
+                            courses = self.create_section_courses(program, year, self.trimester_var.get())
+                            
+                            for course in courses:
+                                ws.cell(row=row, column=1, value=course.code)
+                                ws.cell(row=row, column=2, value=course.description)
+                                ws.cell(row=row, column=3, value=course.time)
+                                ws.cell(row=row, column=4, value=course.days)
+                                ws.cell(row=row, column=5, value=course.room)
+                                row += 1
+                            
+                            row += 1
         
-        # Remove default sheet
         wb.remove(wb['Sheet'])
         
-        # Save workbook
         file_path = filedialog.asksaveasfilename(
             defaultextension=".xlsx",
             filetypes=[("Excel files", "*.xlsx")]
